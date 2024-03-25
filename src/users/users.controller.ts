@@ -1,4 +1,4 @@
-import {Post, Get, Put, Body, Controller, NotFoundException, UseInterceptors} from '@nestjs/common'
+import {Post, Get, Put, Body, Controller, NotFoundException, UseInterceptors, UseGuards} from '@nestjs/common'
 import { SerializerInterceptor } from 'src/utils/interceptors/serialize.interceptor';
 import { ResponseUserDto } from '../utils/dtos/response-user.dto';
 import { UsersService } from './users.service';

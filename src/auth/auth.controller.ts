@@ -7,7 +7,7 @@ import { UseInterceptors } from '@nestjs/common';
 import { SerializerInterceptor } from 'src/utils/interceptors/serialize.interceptor';
 import { ResponseUserDto } from 'src/utils/dtos/response-user.dto';
 import { SignInUserDto } from 'src/utils/dtos/signin-user.dto';
-import { User } from 'src/users/user.entity';
+import { User } from './../entities/index';
 
 
 @Controller('auth')
@@ -24,7 +24,13 @@ export class AuthController {
         if(!this.authService.decrypt(password,existingUser.password)){
             throw new NotFoundException("Incorrect password")
         }
-        return this.authService.generateToken(existingUser)
+        const token = this.authService.generateToken(existingUser)
+
+        return {
+            token: token,
+            id: existingUser.id,
+            email: existingUser.email
+        }
     }   
 
     @UseInterceptors(new SerializerInterceptor(ResponseUserDto))

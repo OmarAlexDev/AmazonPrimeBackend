@@ -2,15 +2,18 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm/repository/Repository';
 import { CreateUserDto } from '../utils/dtos/create-user.dto';
-import { User } from './user.entity';
+import { User } from '../entities/';
+import { CartService } from 'src/cart/cart.service';
 
 @Injectable()
 export class UsersService {
-    constructor(@InjectRepository(User) private repo: Repository<User>){}
+    constructor(@InjectRepository(User) private repo: Repository<User>, private cartService: CartService){}
 
-    addUser(user: CreateUserDto){
-        const savedUser =  this.repo.create(user);
-        return this.repo.save(savedUser);
+    async addUser(user: CreateUserDto){
+        const newUser =  this.repo.create(user);
+        const savedUser = await this.repo.save(newUser)
+        await this.cartService.createCart(savedUser);
+        return savedUser;
     }
 
     find(email: string){

@@ -4,10 +4,13 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm/dist';
-import { User } from './users/user.entity';
 import { APP_PIPE } from '@nestjs/core';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { CartModule } from './cart/cart.module';
+import { ProductsModule } from './products/products.module';
+import { Product, User, Cart, Order } from './entities';
+import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [
@@ -17,12 +20,15 @@ import { ConfigModule } from '@nestjs/config';
       type: 'sqlite',
       database: 'db/ml.sqlite',
       synchronize: true,
-      entities: [User],
+      entities: [User,Product,Order,Cart],
     }),
     ConfigModule.forRoot({
       envFilePath: '.env.development',
       isGlobal: true
-    })
+    }),
+    CartModule,
+    ProductsModule,
+    OrdersModule
   ],
   controllers: [AppController],
   providers: [

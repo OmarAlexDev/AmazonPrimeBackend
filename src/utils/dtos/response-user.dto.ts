@@ -1,4 +1,5 @@
 import {Expose} from 'class-transformer'
+import { Cart } from 'src/entities';
 
 export class ResponseUserDto{
 
@@ -12,6 +13,9 @@ export class ResponseUserDto{
 
     @Expose()
     lastName: string;
+
+    @Expose()
+    cart: Cart
     
     id: number;
 }
