@@ -1,13 +1,12 @@
-### Create product
-POST http://localhost:3001/products
+### Create movie
+POST http://localhost:3001/movies
 Content-Type: application/json; charset=utf-8
 
 {
-    "quantity_on_inventory": 2,
-    "price": 200,
-    "name": "Lala Entera"
+    "title": "Avengers",
+    "year": 2008
 }
 
-### Obtain product
-GET http://localhost:3001/products?price=200
+### Obtain movie
+GET http://localhost:3001/movies
 Content-Type: application/json; charset=utf-8

@@ -13,6 +13,7 @@ export class SerializerInterceptor implements NestInterceptor{
     intercept(context: ExecutionContext, next: CallHandler<any>):  Observable<any>{
         return next.handle().pipe(
             map((data:any)=>{
+                console.log(data)
                 return plainToInstance(this.dto, data, {
                     excludeExtraneousValues: true
                 })

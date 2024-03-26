@@ -1,25 +1,29 @@
 import { IsOptional } from "class-validator";
 import { Transform } from "class-transformer";
 
-export class FilterProduct{
+export class FilterMovie{
 
     @IsOptional()
     @Transform(({value})=>value.replace('_',' '))
-    name: string;
+    title: string;
 
     @IsOptional()
-    @Transform(({value})=>value.replace('_',' '))
-    category: string;
-
-    @IsOptional()
-    @Transform(({value})=>value.replace('_',' '))
-    brand: string;
+    @Transform(({value})=>value.replace('_',','))
+    categories: string;
 
     @IsOptional()
     @Transform(({value})=>Number(value))
-    price: number;
+    year: number;
 
     @IsOptional()
     @Transform(({value})=>Number(value))
-    quantity_on_inventory: number;
+    ageLimit: number;
+
+    @IsOptional()
+    @Transform(({value})=>Number(value))
+    imdb: number;
+
+    @IsOptional()
+    @Transform(({value})=>value.replace('_',' '))
+    studio: string;
 }

@@ -8,8 +8,8 @@ import { APP_PIPE } from '@nestjs/core';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { CartModule } from './cart/cart.module';
-import { ProductsModule } from './products/products.module';
-import { Product, User, Cart, Order } from './entities';
+import { MoviesModule } from './movies/movies.module';
+import { Movie, User, Cart, Order } from './entities';
 import { OrdersModule } from './orders/orders.module';
 
 @Module({
@@ -20,14 +20,14 @@ import { OrdersModule } from './orders/orders.module';
       type: 'sqlite',
       database: 'db/ml.sqlite',
       synchronize: true,
-      entities: [User,Product,Order,Cart],
+      entities: [User,Movie,Order,Cart],
     }),
     ConfigModule.forRoot({
       envFilePath: '.env.development',
       isGlobal: true
     }),
     CartModule,
-    ProductsModule,
+    MoviesModule,
     OrdersModule
   ],
   controllers: [AppController],
