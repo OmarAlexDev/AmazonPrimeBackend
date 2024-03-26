@@ -1,0 +1,13 @@
+### Create product
+POST http://localhost:3001/products
+Content-Type: application/json; charset=utf-8
+
+{
+    "quantity_on_inventory": 2,
+    "price": 200,
+    "name": "Lala Entera"
+}
+
+### Obtain product
+GET http://localhost:3001/products?price=200
+Content-Type: application/json; charset=utf-8

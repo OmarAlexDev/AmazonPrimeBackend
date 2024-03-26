@@ -1,12 +1,12 @@
 import { Controller, Body, NotFoundException} from '@nestjs/common';
 import { Post } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
-import { CreateUserDto } from 'src/utils/dtos/create-user.dto';
+import { CreateUserDto } from 'src/utils/dtos/users/create-user.dto';
 import { AuthService } from './auth.service';
 import { UseInterceptors } from '@nestjs/common';
 import { SerializerInterceptor } from 'src/utils/interceptors/serialize.interceptor';
-import { ResponseUserDto } from 'src/utils/dtos/response-user.dto';
-import { SignInUserDto } from 'src/utils/dtos/signin-user.dto';
+import { ResponseUserDto } from 'src/utils/dtos/users/response-user.dto';
+import { SignInUserDto } from 'src/utils/dtos/users/signin-user.dto';
 import { User } from './../entities/index';
 
 

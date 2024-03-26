@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { User } from './../entities/index';
-import { CreateUserDto } from 'src/utils/dtos/create-user.dto';
+import { CreateUserDto } from 'src/utils/dtos/users/create-user.dto';
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 

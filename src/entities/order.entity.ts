@@ -12,9 +12,6 @@ export class Order{
     @Column()
     totalPrice: number;
 
-    @OneToMany(()=>Product, (product)=>product.order)
-    products: Product []
-
     @ManyToOne(()=>Cart, (cart)=>cart.orders)
     cart: Cart
 }

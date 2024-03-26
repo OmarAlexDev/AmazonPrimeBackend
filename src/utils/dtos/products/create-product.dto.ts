@@ -5,6 +5,7 @@ export class CreateProductDto{
     name: string;
 
     @IsNumber()
+    @IsOptional()
     quantity_on_inventory: number;
 
     @IsOptional()
@@ -12,6 +13,9 @@ export class CreateProductDto{
 
     @IsNumber()
     price: number;
+
+    @IsOptional()
+    brand: string;
 
     @IsOptional()
     @IsString()

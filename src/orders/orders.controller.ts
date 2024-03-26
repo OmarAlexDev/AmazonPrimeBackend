@@ -1,6 +1,6 @@
 import { Controller, Get, Param, Body, Post, UseGuards } from '@nestjs/common';
 import { OrdersService } from './orders.service';
-import { PlaceOrderDto } from 'src/utils/dtos/place-order.dto';
+import { PlaceOrderDto } from 'src/utils/dtos/orders/place-order.dto';
 import { AuthGuard } from 'src/utils/guards/auth.guard';
 
 @Controller('orders')

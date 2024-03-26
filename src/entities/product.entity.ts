@@ -1,5 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Order } from "./order.entity";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Product{
@@ -12,6 +11,9 @@ export class Product{
     @Column({nullable: true})
     category: string;
 
+    @Column({nullable: true})
+    brand: string;
+
     @Column()
     price: number;
 
@@ -20,7 +22,4 @@ export class Product{
 
     @Column({default: 0})
     quantity_on_inventory: number;
-
-    @ManyToOne(()=>Order, (order)=>order.products)
-    order: Order
 }
