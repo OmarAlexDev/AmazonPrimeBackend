@@ -14,9 +14,12 @@ export class User{
     password: string;
 
     @Column()
-    firstName: string
+    firstName: string;
 
-    @Column({default:""})
-    lastName: string
+    @Column({nullable: true})
+    lastName: string;
+
+    @Column({default: false})
+    isAdmin: boolean;
 
 }

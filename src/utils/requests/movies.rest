@@ -1,0 +1,14 @@
+### Create movie
+POST http://localhost:3001/movies
+Content-Type: application/json; charset=utf-8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MkB0ZXN0LmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxMTUwNDY3MiwiZXhwIjoxNzExNTA4MjcyfQ.XCSU4miNfmnCD1ouXEbC7T1xclg6Hxtuojj6BzOT5GQ
+
+{
+    "title": "Avengers Endgame",
+    "year": 2020
+}
+
+### Obtain movie
+GET http://localhost:3001/movies?title=Avengers
+Content-Type: application/json; charset=utf-8
+

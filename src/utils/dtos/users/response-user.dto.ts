@@ -3,6 +3,8 @@ import { Cart } from 'src/entities';
 
 export class ResponseUserDto{
 
+    id: number;
+
     @Expose()
     email: string;
 
@@ -16,6 +18,7 @@ export class ResponseUserDto{
 
     @Expose()
     cart: Cart
-    
-    id: number;
+
+    adminLevel: boolean;
+
 }

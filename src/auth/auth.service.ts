@@ -29,7 +29,8 @@ export class AuthService {
     generateToken(user: User){
         const data = {
             id:user.id,
-            email: user.email
+            email: user.email,
+            isAdmin: user.isAdmin
         }
         return jwt.sign(data, process.env.SECRET,{expiresIn: '1h'}) 
     }
@@ -42,5 +43,11 @@ export class AuthService {
             throw new NotFoundException(err.message)
         }
         
+    }
+
+    extractAdminLevel(token: string){
+        const decoded_token = jwt.verify(token, process.env.SECRET);
+        console.log(decoded_token);
+        return decoded_token;
     }
 }

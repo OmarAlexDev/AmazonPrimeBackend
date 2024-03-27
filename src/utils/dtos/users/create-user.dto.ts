@@ -1,4 +1,4 @@
-import { IsString, IsOptional, IsEmail } from "class-validator";
+import { IsString, IsOptional, IsEmail, IsNumber, IsBoolean } from "class-validator";
 import { Cart } from "src/entities";
 
 export class CreateUserDto{
@@ -15,4 +15,8 @@ export class CreateUserDto{
     @IsString()
     @IsOptional()
     lastName: string;
+
+    @IsOptional()
+    @IsBoolean()
+    isAdmin: boolean;
 }
