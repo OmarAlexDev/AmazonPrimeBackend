@@ -1,8 +1,9 @@
-import { Controller, ConflictException, UseInterceptors, UseGuards } from '@nestjs/common';
+import { Controller, ConflictException, UseInterceptors, UseGuards, Param, Put, NotFoundException } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import {Body, Post, Get, Query} from '@nestjs/common'
 import { CreateMovieDto } from 'src/utils/dtos/movies/create-movie.dto';
 import { FilterMovie } from 'src/utils/dtos/movies/filter-movie.dto';
+import { UpdateMovieDto } from 'src/utils/dtos/movies/update-movie.dto';
 import { SerializerInterceptor } from 'src/utils/interceptors/serialize.interceptor';
 import { ResponseMovieDto } from 'src/utils/dtos/movies/response-movie.dto';
 import { AdminGuard } from 'src/utils/guards/admin.guard';
@@ -22,8 +23,22 @@ export class MoviesController {
         return this.moviesService.createMovie(body);
     }
 
+    @UseGuards(AdminGuard)
+    @Put('/:id')
+    async updateMovie(@Param('id') id: string, @Body() body: UpdateMovieDto){
+        if(!await this.moviesService.findMovieById(Number(id))){
+            throw new NotFoundException("User not found");
+        }
+        return await this.moviesService.updateMovie(Number(id), body)
+    }
+
     @Get()
-    getMovies(@Query() {title, categories, year, ageLimit, imdb, studio}: FilterMovie){
-        return this.moviesService.findMovie({title, categories, year, ageLimit, imdb, studio})
+    async getMovies(@Query() {title, categories, year, ageLimit, imdb, studio}: FilterMovie){
+        return await this.moviesService.findMovie({title, categories, year, ageLimit, imdb, studio})
+    }
+
+    @Get('/:id')
+    async getMovie(@Param('id') id: string){
+        return await this.moviesService.findMovieById(Number(id));
     }
 }

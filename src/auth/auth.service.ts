@@ -47,7 +47,6 @@ export class AuthService {
 
     extractAdminLevel(token: string){
         const decoded_token = jwt.verify(token, process.env.SECRET);
-        console.log(decoded_token);
         return decoded_token;
     }
 }

@@ -19,6 +19,7 @@ export class ResponseUserDto{
     @Expose()
     cart: Cart
 
-    adminLevel: boolean;
+    @Expose()
+    isAdmin: boolean;
 
 }

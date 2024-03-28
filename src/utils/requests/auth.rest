@@ -8,7 +8,7 @@ Content-Type: application/json; charset=utf-8
     "firstName": "Alejandro"
 }
 
-### Create user
+### Sign user
 POST http://localhost:3001/auth/sign-in
 Content-Type: application/json; charset=utf-8
 

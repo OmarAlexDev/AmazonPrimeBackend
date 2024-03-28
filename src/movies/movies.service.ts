@@ -15,8 +15,12 @@ export class MoviesService {
         return await this.repo.save(newMovie);
     }
 
+    async findMovieById(id:number){
+        return await this.repo.findOneBy({id});
+    }
+
     async findMovie({title, categories, year, ageLimit, imdb, studio}: Partial<Movie>){
-        const query = this.repo.createQueryBuilder("movie")    
+        const query = this.repo.createQueryBuilder("movie")
         title && query.orWhere("title = :title", {title})
         year && query.orWhere("year = :year",{year})
         ageLimit && query.orWhere("ageLimit = :ageLimit",{ageLimit})
@@ -27,6 +31,13 @@ export class MoviesService {
                 query.orWhere(`categories LIKE '%${element}%'`)
             });
         }
-        return await query.getMany()
+        return await query.getMany();
+    }
+
+    async updateMovie(id: number, content: Partial<Movie>){
+        const query = this.repo.createQueryBuilder().update(Movie)
+        query.set(content)
+        query.where("id= :id",{id})
+        return (await query.execute()).raw[0];
     }
 }
