@@ -1,4 +1,4 @@
-import { Controller, ConflictException, UseInterceptors, UseGuards, Param, Put, NotFoundException } from '@nestjs/common';
+import { Controller, ConflictException, UseInterceptors, UseGuards, Param, Put, NotFoundException, Delete } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import {Body, Post, Get, Query} from '@nestjs/common'
 import { CreateMovieDto } from 'src/utils/dtos/movies/create-movie.dto';
@@ -40,5 +40,13 @@ export class MoviesController {
     @Get('/:id')
     async getMovie(@Param('id') id: string){
         return await this.moviesService.findMovieById(Number(id));
+    }
+
+    @Delete('/:id')
+    async deleteMovie(@Param('id') id : string){
+        if(!await this.moviesService.findMovieById(Number(id))){
+            throw new NotFoundException("User not found");
+        }
+        return await this.moviesService.deleteMovie(Number(id));
     }
 }

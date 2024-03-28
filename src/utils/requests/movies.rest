@@ -27,3 +27,6 @@ Content-Type: application/json; charset=utf-8
 ### Obtain movie by id
 
 GET http://localhost:3001/movies/8
+
+### Delete movie by id
+Delete http://localhost:3001/movies/6

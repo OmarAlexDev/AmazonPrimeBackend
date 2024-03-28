@@ -40,4 +40,13 @@ export class MoviesService {
         query.where("id= :id",{id})
         return (await query.execute()).raw[0];
     }
+
+    async deleteMovie(id:number){
+        const query = this.repo.createQueryBuilder()
+        .delete()
+        .from(Movie)
+        .where("id = :id", { id: id })
+
+        return (await query.execute()).raw[0];
+    }
 }
