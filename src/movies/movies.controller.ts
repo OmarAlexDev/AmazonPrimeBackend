@@ -26,10 +26,11 @@ export class MoviesController {
     @UseGuards(AdminGuard)
     @Put('/:id')
     async updateMovie(@Param('id') id: string, @Body() body: UpdateMovieDto){
-        if(!await this.moviesService.findMovieById(Number(id))){
-            throw new NotFoundException("User not found");
+        const movie = await this.moviesService.findMovieById(Number(id));
+        if(!movie){
+            throw new NotFoundException("Movie with given id not found");
         }
-        return await this.moviesService.updateMovie(Number(id), body)
+        return await this.moviesService.updateMovie(movie, body)
     }
 
     @Get()
@@ -42,11 +43,14 @@ export class MoviesController {
         return await this.moviesService.findMovieById(Number(id));
     }
 
+    @UseGuards(AdminGuard)
     @Delete('/:id')
     async deleteMovie(@Param('id') id : string){
         if(!await this.moviesService.findMovieById(Number(id))){
-            throw new NotFoundException("User not found");
+            throw new NotFoundException("Movie not found");
         }
-        return await this.moviesService.deleteMovie(Number(id));
+
+        await this.moviesService.deleteMovie(Number(id));
+        return JSON.stringify({"message": "Movie was successfully deleted."});
     }
 }

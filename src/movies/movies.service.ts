@@ -34,19 +34,15 @@ export class MoviesService {
         return await query.getMany();
     }
 
-    async updateMovie(id: number, content: Partial<Movie>){
-        const query = this.repo.createQueryBuilder().update(Movie)
-        query.set(content)
-        query.where("id= :id",{id})
-        return (await query.execute()).raw[0];
+    async updateMovie(movie: Movie, content: Partial<Movie>){
+        return await this.repo.save({id:movie.id, ...movie, ...content})
     }
 
     async deleteMovie(id:number){
-        const query = this.repo.createQueryBuilder()
+        return await this.repo.createQueryBuilder()
         .delete()
         .from(Movie)
         .where("id = :id", { id: id })
-
-        return (await query.execute()).raw[0];
+        .execute();
     }
 }
