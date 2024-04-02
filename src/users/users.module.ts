@@ -4,11 +4,11 @@ import { UsersService } from './users.service';
 import { TypeOrmModule } from '@nestjs/typeorm/dist';
 import { User } from '../entities/user.entity';
 import { AuthService } from 'src/auth/auth.service';
-import { CartModule } from 'src/cart/cart.module';
+import { WishlistModule } from 'src/wishlist/wishlist.module';
 
 @Module({
   controllers: [UsersController],
-  imports: [TypeOrmModule.forFeature([User]), CartModule],
+  imports: [TypeOrmModule.forFeature([User]), WishlistModule],
   providers: [
     UsersService,
     AuthService

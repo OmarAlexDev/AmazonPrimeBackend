@@ -1,8 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, OneToOne, JoinColumn} from "typeorm";
-import { Order, User } from "../entities/index";
+import { User } from "./index";
 
 @Entity()
-export class Cart{
+export class Wishlist{
     @PrimaryGeneratedColumn()
     id: number
 
@@ -13,6 +13,4 @@ export class Cart{
     @JoinColumn()
     user: User
 
-    @OneToMany(()=>Order, (order=>order.cart))
-    orders: Order[]
 }

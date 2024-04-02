@@ -1,5 +1,5 @@
 import {Expose} from 'class-transformer'
-import { Cart } from 'src/entities';
+import { Wishlist } from 'src/entities';
 
 export class ResponseUserDto{
 
@@ -17,7 +17,7 @@ export class ResponseUserDto{
     lastName: string;
 
     @Expose()
-    cart: Cart
+    cart: Wishlist
 
     @Expose()
     isAdmin: boolean;

@@ -1,5 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn} from "typeorm";
-import { Exclude } from "class-transformer";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany} from "typeorm";
+import { Profile } from "./profile.entity";
 
 @Entity()
 export class User{
@@ -22,4 +22,6 @@ export class User{
     @Column({default: false})
     isAdmin: boolean;
 
+    @OneToMany(()=>Profile, (profile)=> profile.user)
+    profiles: Profile[]
 }

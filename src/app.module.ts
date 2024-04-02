@@ -7,10 +7,10 @@ import { TypeOrmModule } from '@nestjs/typeorm/dist';
 import { APP_PIPE } from '@nestjs/core';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
-import { CartModule } from './cart/cart.module';
+import { WishlistModule } from './wishlist/wishlist.module';
 import { MoviesModule } from './movies/movies.module';
-import { Movie, User, Cart, Order } from './entities';
-import { OrdersModule } from './orders/orders.module';
+import { Movie, Profile, User, Wishlist } from './entities';
+import { ProfilesModule } from './profiles/profiles.module';
 
 @Module({
   imports: [
@@ -20,15 +20,15 @@ import { OrdersModule } from './orders/orders.module';
       type: 'sqlite',
       database: 'db/ml.sqlite',
       synchronize: true,
-      entities: [User,Movie,Order,Cart],
+      entities: [User,Movie,Wishlist, Profile],
     }),
     ConfigModule.forRoot({
       envFilePath: '.env.development',
       isGlobal: true
     }),
-    CartModule,
+    WishlistModule,
     MoviesModule,
-    OrdersModule
+    ProfilesModule
   ],
   controllers: [AppController],
   providers: [

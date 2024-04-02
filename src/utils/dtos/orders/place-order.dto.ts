@@ -1,5 +1,5 @@
 import { IsInstance, IsNumber, IsString } from "class-validator";
-import { Movie, Cart } from "src/entities";
+import { Movie, Wishlist } from "src/entities";
 
 export class PlaceOrderDto{
     @IsInstance(Movie)
