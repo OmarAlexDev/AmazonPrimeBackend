@@ -8,12 +8,12 @@ import { SerializerInterceptor } from 'src/utils/interceptors/serialize.intercep
 import { ResponseUserDto } from 'src/utils/dtos/users/response-user.dto';
 import { SignInUserDto } from 'src/utils/dtos/users/signin-user.dto';
 import { User } from './../entities/index';
-
+import { ProfilesService } from 'src/profiles/profiles.service';
 
 @Controller('auth')
 export class AuthController {
 
-    constructor(private authService : AuthService, private usersService: UsersService){}
+    constructor(private authService : AuthService, private usersService: UsersService, private profilesService: ProfilesService){}
     
     @Post("sign-in")
     async signIn(@Body() {email, password}: SignInUserDto){

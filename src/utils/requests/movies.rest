@@ -1,7 +1,7 @@
 ### Create movie
 POST http://localhost:3001/movies
 Content-Type: application/json; charset=utf-8
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MkB0ZXN0LmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxMTU4MTUzNSwiZXhwIjoxNzExNTg1MTM1fQ.GzR6s5mqRwSzU5giM-4Rh2ZefI8-cavM2BJJ6ESZATE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MkB0ZXN0LmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxMjAyMjU0OSwiZXhwIjoxNzEyMDI2MTQ5fQ.IahVsAFEZfyn55ePvUmKP3DMbU1247qJr5s3zv8ENXc
 
 {
     "title": "Avengers Endgame",
@@ -14,6 +14,7 @@ Content-Type: application/json; charset=utf-8
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MkB0ZXN0LmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxMjAyMjU0OSwiZXhwIjoxNzEyMDI2MTQ5fQ.IahVsAFEZfyn55ePvUmKP3DMbU1247qJr5s3zv8ENXc
 
 {
+    
     "year": 2008,
     "categories": ["Superheroes"],
     "directors": ["Anthony Russo","Joe Russo"]
@@ -30,5 +31,5 @@ GET http://localhost:3001/movies/8
 
 ### Delete movie by id
 
-Delete http://localhost:3001/movies/5
+Delete http://localhost:3001/movies/10
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MkB0ZXN0LmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxMjAyMjU0OSwiZXhwIjoxNzEyMDI2MTQ5fQ.IahVsAFEZfyn55ePvUmKP3DMbU1247qJr5s3zv8ENXc
