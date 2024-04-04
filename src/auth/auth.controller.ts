@@ -13,7 +13,7 @@ import { ProfilesService } from 'src/profiles/profiles.service';
 @Controller('auth')
 export class AuthController {
 
-    constructor(private authService : AuthService, private usersService: UsersService, private profilesService: ProfilesService){}
+    constructor(private authService : AuthService, private usersService: UsersService){}
     
     @Post("sign-in")
     async signIn(@Body() {email, password}: SignInUserDto){

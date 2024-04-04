@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToOne, JoinColumn } from "typeorm";
 import { User } from "./user.entity";
+import { Wishlist } from "./wishlist.entity";
 
 @Entity()
 export class Profile{
@@ -17,4 +18,8 @@ export class Profile{
         cascade: true
     })
     user: User;
+
+    @OneToOne(()=> Wishlist, (wishlist)=>wishlist.profile)
+    @JoinColumn()
+    wishlist: Wishlist;
 }

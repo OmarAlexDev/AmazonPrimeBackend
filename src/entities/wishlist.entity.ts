@@ -1,16 +1,16 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, OneToOne, JoinColumn} from "typeorm";
-import { User } from "./index";
+import { Entity, PrimaryGeneratedColumn, OneToOne, ManyToMany, JoinTable} from "typeorm";
+import { Movie } from "./movie.entity";
+import { Profile } from "./profile.entity";
 
 @Entity()
 export class Wishlist{
     @PrimaryGeneratedColumn()
     id: number
+    
+    @OneToOne(()=> Profile, (profile)=>profile.wishlist, {cascade:true})
+    profile: Profile
 
-    @Column({default:0})
-    quantity: number;
-
-    @OneToOne(()=>User)
-    @JoinColumn()
-    user: User
-
+    @ManyToMany(() => Movie)
+    @JoinTable()
+    movies:  Movie []
 }

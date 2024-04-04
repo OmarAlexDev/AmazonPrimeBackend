@@ -8,6 +8,7 @@ import { AuthModule } from 'src/auth/auth.module';
 @Module({
   controllers: [MoviesController],
   imports: [TypeOrmModule.forFeature([Movie]), AuthModule],
-  providers: [MoviesService]
+  providers: [MoviesService],
+  exports: [MoviesService]
 })
 export class MoviesModule {}

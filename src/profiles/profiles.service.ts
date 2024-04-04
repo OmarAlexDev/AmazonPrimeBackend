@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Profile, User } from 'src/entities';
+import { Profile } from 'src/entities';
 import { Repository } from 'typeorm';
 
 
@@ -8,9 +8,7 @@ import { Repository } from 'typeorm';
 export class ProfilesService {
     constructor(@InjectRepository(Profile) private repo: Repository<Profile>){}
 
-    async createProfile(username: string, user: User){
-         const profile =  this.repo.create({username, user});
-         return await this.repo.save(profile);
+    async findProfileById(id:number){
+        return await this.repo.findOneBy({id});
     }
-
 }
