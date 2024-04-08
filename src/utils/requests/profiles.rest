@@ -1,0 +1,7 @@
+### Obtain profiles
+GET http://localhost:3001/profiles
+Content-Type: application/json; charset=utf-8
+
+### Obtain profile
+GET http://localhost:3001/profiles/1
+Content-Type: application/json; charset=utf-8

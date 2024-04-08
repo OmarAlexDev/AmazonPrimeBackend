@@ -7,7 +7,7 @@ export class Wishlist{
     @PrimaryGeneratedColumn()
     id: number
     
-    @OneToOne(()=> Profile, (profile)=>profile.wishlist, {cascade:true})
+    @OneToOne(()=> Profile, (profile)=>profile.wishlist)
     profile: Profile
 
     @ManyToMany(() => Movie)

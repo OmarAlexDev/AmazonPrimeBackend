@@ -7,9 +7,5 @@ import { DataSource } from 'typeorm';
 @Controller('wishlist')
 export class WishlistController {
     constructor(private wishlistService: WishlistService, private dataSource: DataSource){}
-
     
-    async addMovietoWishlist(@Body() {profileId, movieId}: AddMovieToWishlistDTO){
-       
-    }
 }

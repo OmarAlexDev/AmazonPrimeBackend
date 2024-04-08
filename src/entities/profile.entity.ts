@@ -14,9 +14,7 @@ export class Profile{
     @Column({default: false})
     forKids: boolean;
 
-    @ManyToOne(()=>User, (user)=>user.profiles, {
-        cascade: true
-    })
+    @ManyToOne(()=>User, (user)=>user.profiles)
     user: User;
 
     @OneToOne(()=> Wishlist, (wishlist)=>wishlist.profile)

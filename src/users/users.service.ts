@@ -4,33 +4,53 @@ import { Repository } from 'typeorm/repository/Repository';
 import { CreateUserDto } from '../utils/dtos/users/create-user.dto';
 import { User, Profile, Wishlist } from '../entities/';
 import { ProfilesService } from 'src/profiles/profiles.service';
-import { DataSource } from 'typeorm';
+import { DataSource, In } from 'typeorm';
 
 @Injectable()
 export class UsersService {
     constructor(@InjectRepository(User) private repo: Repository<User>, private dataSource: DataSource){}
 
     async addUser(user: CreateUserDto){
-        const newUser =  this.repo.create(user);
-
+        
         const defaultProfile = new Profile();
-        defaultProfile.username = newUser.firstName;
-        defaultProfile.user = newUser;
+        defaultProfile.username = user.firstName;
+        const savedProfile = await this.dataSource.manager.save(defaultProfile);
 
         const defaultWishlist = new Wishlist();
-        defaultWishlist.profile = defaultProfile;
-
-        newUser.profiles=[defaultProfile];
-
+        defaultWishlist.profile = savedProfile;
         await this.dataSource.manager.save(defaultWishlist);
-        return newUser;
+
+        const newUser =  this.repo.create(user);
+        newUser.profiles=[savedProfile];
+        
+        return await this.repo.save(newUser);
     }
 
-    find(email: string){
-        return this.repo.findOneBy({email}) 
+    async find(email?: string, id?: number){
+        return await this.repo.findOneBy({email: email, id: id}) 
     }
 
     async findAll (){
         return await this.repo.find()
+    }
+
+    async deleteUser(id: number){
+        const userProfiles =  (
+            await this.dataSource
+            .createQueryBuilder()
+            .select("Id")
+            .from(Profile, "profile")
+            .where("userId = :id", { id: id })
+            .getRawMany()
+        ).map(el=>{return el.id});
+
+        if(userProfiles.length>0){
+            return await this.dataSource
+                .createQueryBuilder()
+                .select("wishlist")
+                .from(Wishlist, "wishlist")
+                .where("Id IN (:...userProfiles)",{userProfiles})
+                .getRawMany();
+        }
     }
 }

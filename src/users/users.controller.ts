@@ -1,4 +1,4 @@
-import {Post, Get, Put, Body, Controller, NotFoundException, UseInterceptors, UseGuards} from '@nestjs/common'
+import {Post,   Delete, Get, Put, Body, Param,Controller, NotFoundException, UseInterceptors, UseGuards} from '@nestjs/common'
 import { SerializerInterceptor } from 'src/utils/interceptors/serialize.interceptor';
 import { ResponseUserDto } from '../utils/dtos/users/response-user.dto';
 import { UsersService } from './users.service';
@@ -13,4 +13,18 @@ export class UsersController {
     getUsers(){
         return this.usersService.findAll();
     }
+
+    @Get('/:id')
+    getUser(@Param('id') id: string){
+        return this.usersService.find(null, Number(id));
+    }
+
+    @Delete('/:id')
+    async deleteUser(@Param('id') id: string){
+        if(!await this.usersService.find(null, Number(id))){
+            throw new NotFoundException('User with given Id does not exists');
+        }
+        return await this.usersService.deleteUser(Number(id));
+    }
+
 }

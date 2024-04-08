@@ -18,7 +18,7 @@ import { ProfilesModule } from './profiles/profiles.module';
     AuthModule,
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: 'db/ml.sqlite',
+      database: 'db/amazonPrime.sqlite',
       synchronize: true,
       entities: [User,Movie,Wishlist, Profile],
     }),

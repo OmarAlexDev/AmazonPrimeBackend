@@ -8,7 +8,11 @@ import { Repository } from 'typeorm';
 export class ProfilesService {
     constructor(@InjectRepository(Profile) private repo: Repository<Profile>){}
 
-    async findProfileById(id:number){
+    async find(id:number){
         return await this.repo.findOneBy({id});
+    }
+
+    async findAll(){
+        return await this.repo.find();
     }
 }
