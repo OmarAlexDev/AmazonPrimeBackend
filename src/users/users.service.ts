@@ -1,9 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UseGuards } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm/repository/Repository';
 import { CreateUserDto } from '../utils/dtos/users/create-user.dto';
 import { User, Profile, Wishlist } from '../entities/';
-import { ProfilesService } from 'src/profiles/profiles.service';
 import { DataSource, In } from 'typeorm';
 
 @Injectable()

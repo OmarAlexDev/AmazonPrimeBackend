@@ -7,7 +7,7 @@ import { MoviesModule } from 'src/movies/movies.module';
 
 @Module({
   providers: [WishlistService],
-  imports: [TypeOrmModule.forFeature([Wishlist]), MoviesModule],
+  imports: [TypeOrmModule.forFeature([Wishlist])],
   exports: [WishlistService],
   controllers: [WishlistController]
 })

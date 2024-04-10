@@ -7,7 +7,4 @@ import { InjectRepository } from '@nestjs/typeorm';
 export class WishlistService {
     constructor(@InjectRepository(Wishlist) private repo: Repository<Wishlist>){}
 
-    async addMovie(){
-
-    }
 }

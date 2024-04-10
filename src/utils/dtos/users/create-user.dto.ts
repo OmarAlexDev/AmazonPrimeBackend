@@ -1,5 +1,4 @@
-import { IsString, IsOptional, IsEmail, IsNumber, IsBoolean } from "class-validator";
-import { Wishlist } from "src/entities";
+import { IsString, IsOptional, IsEmail, IsBoolean } from "class-validator";
 
 export class CreateUserDto{
 

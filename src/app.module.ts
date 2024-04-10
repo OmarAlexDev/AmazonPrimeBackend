@@ -11,6 +11,7 @@ import { WishlistModule } from './wishlist/wishlist.module';
 import { MoviesModule } from './movies/movies.module';
 import { Movie, Profile, User, Wishlist } from './entities';
 import { ProfilesModule } from './profiles/profiles.module';
+import { AccountModule } from './account/account.module';
 
 @Module({
   imports: [
@@ -28,7 +29,8 @@ import { ProfilesModule } from './profiles/profiles.module';
     }),
     WishlistModule,
     MoviesModule,
-    ProfilesModule
+    ProfilesModule,
+    AccountModule
   ],
   controllers: [AppController],
   providers: [

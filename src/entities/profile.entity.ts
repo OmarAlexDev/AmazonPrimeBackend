@@ -14,6 +14,9 @@ export class Profile{
     @Column({default: false})
     forKids: boolean;
 
+    @Column({default: null})
+    pin: number;
+
     @ManyToOne(()=>User, (user)=>user.profiles)
     user: User;
 

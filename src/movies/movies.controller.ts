@@ -1,4 +1,4 @@
-import { Controller, ConflictException, UseInterceptors, UseGuards, Param, Put, NotFoundException, Delete } from '@nestjs/common';
+import { Controller, ConflictException, UseInterceptors, Param, Put, NotFoundException, Delete } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import {Body, Post, Get, Query} from '@nestjs/common'
 import { CreateMovieDto } from 'src/utils/dtos/movies/create-movie.dto';
@@ -6,14 +6,13 @@ import { FilterMovie } from 'src/utils/dtos/movies/filter-movie.dto';
 import { UpdateMovieDto } from 'src/utils/dtos/movies/update-movie.dto';
 import { SerializerInterceptor } from 'src/utils/interceptors/serialize.interceptor';
 import { ResponseMovieDto } from 'src/utils/dtos/movies/response-movie.dto';
-import { AdminGuard } from 'src/utils/guards/admin.guard';
 
 @UseInterceptors(new SerializerInterceptor(ResponseMovieDto))
 @Controller('movies')
 export class MoviesController {
     constructor(private moviesService : MoviesService){}
 
-    @UseGuards(AdminGuard)
+
     @Post()
     async createMovie(@Body() body: CreateMovieDto){
         const movies = await this.moviesService.findMovie({title: body.title})
@@ -23,7 +22,6 @@ export class MoviesController {
         return this.moviesService.createMovie(body);
     }
 
-    @UseGuards(AdminGuard)
     @Put('/:id')
     async updateMovie(@Param('id') id: string, @Body() body: UpdateMovieDto){
         const movie = await this.moviesService.findMovieById(Number(id));
@@ -43,7 +41,6 @@ export class MoviesController {
         return await this.moviesService.findMovieById(Number(id));
     }
 
-    @UseGuards(AdminGuard)
     @Delete('/:id')
     async deleteMovie(@Param('id') id : string){
         if(!await this.moviesService.findMovieById(Number(id))){
