@@ -44,13 +44,25 @@ export class UsersService {
             .getRawMany()
         ).map(el=>{return el.id});
 
-        if(userProfiles.length>0){
-            return await this.dataSource
-                .createQueryBuilder()
-                .select("wishlist")
-                .from(Wishlist, "wishlist")
-                .where("Id IN (:...userProfiles)",{userProfiles})
-                .getRawMany();
+        if(userProfiles && userProfiles.length>0){
+            await this.dataSource.createQueryBuilder()
+            .delete()
+            .from(Profile)
+            .where("userId = :id", { id: id })
+            .execute();
+
+            await this.dataSource
+            .createQueryBuilder()
+            .delete()
+            .from(Wishlist)
+            .where("Id IN (:...userProfiles)",{userProfiles})
+            .execute();
         }
+
+        return await this.dataSource.createQueryBuilder()
+            .delete()
+            .from(User)
+            .where("Id = :id",{id:id})
+            .execute();
     }
 }
