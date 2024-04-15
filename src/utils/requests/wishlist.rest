@@ -1,0 +1,3 @@
+### Delete wishlist
+DELETE  http://localhost:3001/wishlist/3
+Content-Type: application/json; charset=utf-8

@@ -1,29 +1,13 @@
-import { Injectable, UseGuards } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm/repository/Repository';
 import { CreateUserDto } from '../utils/dtos/users/create-user.dto';
 import { User, Profile, Wishlist } from '../entities/';
-import { DataSource, In } from 'typeorm';
+import { DataSource } from 'typeorm';
 
 @Injectable()
 export class UsersService {
     constructor(@InjectRepository(User) private repo: Repository<User>, private dataSource: DataSource){}
-
-    /*async addUser(user: CreateUserDto){
-        
-        const defaultProfile = new Profile();
-        defaultProfile.username = user.firstName;
-        const savedProfile = await this.dataSource.manager.save(defaultProfile);
-
-        const defaultWishlist = new Wishlist();
-        defaultWishlist.profile = savedProfile;
-        await this.dataSource.manager.save(defaultWishlist);
-
-        const newUser =  this.repo.create(user);
-        newUser.profiles=[savedProfile];
-        
-        return await this.repo.save(newUser);
-    }*/
 
     async createUser(user:CreateUserDto){
         const newUser = this.repo.create(user);
@@ -78,7 +62,12 @@ export class UsersService {
     }
 
     addProfileToUser(user: User, profile: Profile){
-        user.profiles.push(profile);
+        user.profiles ? user.profiles.push(profile) : user.profiles = [profile]
+        return this.repo.save(user);
+    }
+
+    removeProfileFromUser(user: User, profile: Profile){
+        user.profiles  = user.profiles.filter(pro=>pro.id!==profile.id)
         return this.repo.save(user);
     }
 }

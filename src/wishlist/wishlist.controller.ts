@@ -1,11 +1,12 @@
-import { Controller, Post, Body } from '@nestjs/common';
-import { MoviesService } from 'src/movies/movies.service';
-import { AddMovieToWishlistDTO } from 'src/utils/dtos/wishlist/add-movie.dto';
+import { Controller,Delete, Param } from '@nestjs/common';
 import { WishlistService } from './wishlist.service';
-import { DataSource } from 'typeorm';
 
 @Controller('wishlist')
 export class WishlistController {
-    constructor(private wishlistService: WishlistService, private dataSource: DataSource){}
+    constructor(private wishlistService: WishlistService){}
     
+    @Delete('/:id')
+    async deleteWishlist(@Param('id') id: string){
+        return this.wishlistService.deleteWishlist({id:Number(id)})
+    }
 }
