@@ -2,6 +2,10 @@ import { IsString, IsOptional, IsEmail, IsBoolean } from "class-validator";
 
 export class CreateUserDto{
 
+    @IsString()
+    @IsOptional()
+    phone: string;
+
     @IsEmail()
     email: string;
 

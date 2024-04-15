@@ -16,31 +16,31 @@ export class AuthController {
     
     @Post("sign-in")
     async signIn(@Body() {email, password}: SignInUserDto){
-        const existingUser: User = await this.usersService.find(email)
+        const existingUser: User []  = await this.usersService.find(email);
         if(!existingUser){
-            throw new NotFoundException("User with given email not found")
+            throw new NotFoundException(`User with email ${email} not found`)
         }
-        if(!this.authService.decrypt(password,existingUser.password)){
+        if(!this.authService.decrypt(password,existingUser[0].password)){
             throw new NotFoundException("Incorrect password")
         }
-        const token = this.authService.generateToken(existingUser)
+        const token = this.authService.generateToken(existingUser[0])
 
         return {
             token: token,
-            id: existingUser.id,
-            email: existingUser.email
+            id: existingUser[0].id,
+            email: existingUser[0].email
         }
     }   
 
     @UseInterceptors(new SerializerInterceptor(ResponseUserDto))
     @Post("sign-up")
     async signUp(@Body() body: CreateUserDto){
-        const existingUser: User = await this.usersService.find(body.email)
-        if(existingUser){
-            throw new NotFoundException("Email already in use")
+        const existingUser: User [] = await this.usersService.find(body.email);
+        if(existingUser.length > 0){
+            throw new NotFoundException(`User with email ${body.email} already exists`)
         }
         body.password =  await this.authService.encrypt(body);
-        return this.usersService.addUser(body)
+        return this.usersService.createUser(body)
     }
 
 }

@@ -12,7 +12,4 @@ export class CreateProfileDto{
     @Min(0o1)
     @IsOptional()
     pin: number;
-
-    @IsNumber()
-    userId: number;
 }   

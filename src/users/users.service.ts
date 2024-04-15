@@ -9,7 +9,7 @@ import { DataSource, In } from 'typeorm';
 export class UsersService {
     constructor(@InjectRepository(User) private repo: Repository<User>, private dataSource: DataSource){}
 
-    async addUser(user: CreateUserDto){
+    /*async addUser(user: CreateUserDto){
         
         const defaultProfile = new Profile();
         defaultProfile.username = user.firstName;
@@ -23,10 +23,22 @@ export class UsersService {
         newUser.profiles=[savedProfile];
         
         return await this.repo.save(newUser);
+    }*/
+
+    async createUser(user:CreateUserDto){
+        const newUser = this.repo.create(user);
+        return await this.repo.save(newUser);
     }
 
     async find(email?: string, id?: number){
-        return await this.repo.findOneBy({email: email, id: id}) 
+        return await this.repo.find({
+            where: [
+                {email: email},
+                {id: id}
+            ],
+            take: 1,
+            relations: {profiles:true}
+        }) 
     }
 
     async findAll (){
@@ -63,5 +75,10 @@ export class UsersService {
             .from(User)
             .where("Id = :id",{id:id})
             .execute();
+    }
+
+    addProfileToUser(user: User, profile: Profile){
+        user.profiles.push(profile);
+        return this.repo.save(user);
     }
 }

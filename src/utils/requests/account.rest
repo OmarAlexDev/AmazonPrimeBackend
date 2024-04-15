@@ -1,0 +1,21 @@
+### Create account
+POST http://localhost:3001/account/
+Content-Type: application/json; charset=utf-8
+
+{
+    "email": "test1@test.com",  
+    "password": "test" ,   
+    "firstName": "Alejandro"
+}
+
+### Get account profiles
+GET http://localhost:3001/account/2/profiles
+Content-Type: application/json; charset=utf-8
+
+### Add profile to account
+POST http://localhost:3001/account/1/profiles
+Content-Type: application/json; charset=utf-8
+
+{
+    "username": "uncle"
+}
