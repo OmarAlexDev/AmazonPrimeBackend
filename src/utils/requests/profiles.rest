@@ -7,5 +7,5 @@ GET http://localhost:3001/profiles/1
 Content-Type: application/json; charset=utf-8
 
 ### Delete profile
-DELETE  http://localhost:3001/profiles/2
+DELETE  http://localhost:3001/profiles/4
 Content-Type: application/json; charset=utf-8
