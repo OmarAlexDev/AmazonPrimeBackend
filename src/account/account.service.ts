@@ -78,10 +78,8 @@ export class AccountService {
         if(profileToDelete.length===0){
             throw new NotFoundException(`Profile with id ${profileId} not found for user with id ${id}`)
         }
-        console.log("profileToDelete::: ", profileToDelete)
         const wishlistToDelete = await this.profilesService.find(profileToDelete[0].id);
-        console.log("wishlistToDelete::: ", wishlistToDelete)
-        return await this.profilesService.deleteProfile(profileToDelete[0])
-        //return await this.wishlistService.deleteWishlist(wishlistToDelete[0].wishlist);
+        await this.profilesService.deleteProfile({id: profileToDelete[0].id});
+        return await this.wishlistService.deleteWishlist({id: wishlistToDelete[0].wishlist.id});
     }
 }
