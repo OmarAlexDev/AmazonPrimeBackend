@@ -6,7 +6,8 @@ import { AuthService } from 'src/auth/auth.service';
 import { CreateUserDto } from 'src/utils/dtos/users/create-user.dto';
 import { SignInUserDto } from 'src/utils/dtos/users/signin-user.dto';
 import { CreateProfileDto } from 'src/utils/dtos/profile/create-profile.dto';
-import { User } from 'src/entities';
+import { Movie, User } from 'src/entities';
+import { MoviesService } from 'src/movies/movies.service';
 
 @Injectable()
 export class AccountService {
@@ -14,7 +15,8 @@ export class AccountService {
         private usersService: UsersService, 
         private profilesService: ProfilesService, 
         private wishlistService: WishlistService,
-        private authService: AuthService){}
+        private authService: AuthService,
+        private moviesService: MoviesService){}
 
     async createAccount(body: CreateUserDto){
         const existingUser: User [] = await this.usersService.find(body.email,null);
@@ -66,7 +68,7 @@ export class AccountService {
         return (await this.usersService.addProfileToUser(user[0], newProfile)).profiles;
     }
 
-    async removeProfileFromAccount(id: number, profileId: string){
+    async removeProfileFromAccount(id: number, profileId: number){
         const user: User[] = await this.usersService.find(null,id)
 
         if(user.length===0){
@@ -74,12 +76,71 @@ export class AccountService {
         }else if(user[0].profiles.length===1){
             throw new ConflictException('User must have at least one profile')
         }
-        const profileToDelete = user[0].profiles.filter(pro=>pro.id===Number(profileId));
+        const profileToDelete = user[0].profiles.filter(pro=>pro.id===profileId);
         if(profileToDelete.length===0){
             throw new NotFoundException(`Profile with id ${profileId} not found for user with id ${id}`)
         }
         const wishlistToDelete = await this.profilesService.find(profileToDelete[0].id);
         await this.profilesService.deleteProfile({id: profileToDelete[0].id});
         return await this.wishlistService.deleteWishlist({id: wishlistToDelete[0].wishlist.id});
+    }
+
+    async addMovieToProfilesWishlist(id:number, profileId: number, movieId: number){
+        const user: User[] = await this.usersService.find(null,id)
+        const movie: Movie = await this.moviesService.findMovieById(movieId)
+
+        if(user.length===0){
+            throw new NotFoundException(`User with id ${id} not found`);
+        }else if(!movie){
+            throw new NotFoundException(`Movie with id ${movieId} not found`)
+        }
+        const currentProfile = user[0].profiles.filter(pro=>pro.id===profileId);
+        if(currentProfile.length===0){
+            throw new NotFoundException(`Profile with id ${profileId} not found for user with id ${id}`)
+        }
+        const profile = await this.profilesService.find(currentProfile[0].id);
+        const wishlist = await this.wishlistService.findWishlist(profile[0].wishlist);
+
+        if(wishlist[0].movies.find(mov=>mov.id===movieId)){
+            throw new ConflictException('Movie already added to wishlist')
+        }
+        return await this.wishlistService.addMovieToWishlist(wishlist[0], movie);
+    }
+
+    async removeMovieFromProfilesWishlist(id:number, profileId: number, movieId: number){
+        const user: User[] = await this.usersService.find(null,id)
+        const movie: Movie = await this.moviesService.findMovieById(movieId)
+
+        if(user.length===0){
+            throw new NotFoundException(`User with id ${id} not found`);
+        }else if(!movie){
+            throw new NotFoundException(`Movie with id ${movieId} not found`)
+        }
+        const currentProfile = user[0].profiles.filter(pro=>pro.id===profileId);
+        if(currentProfile.length===0){
+            throw new NotFoundException(`Profile with id ${profileId} not found for user with id ${id}`)
+        }
+        const profile = await this.profilesService.find(currentProfile[0].id);
+        const wishlist = await this.wishlistService.findWishlist(profile[0].wishlist);
+
+        if(!wishlist[0].movies.find(mov=>mov.id===movieId)){
+            throw new ConflictException(`Movie with id ${movieId} not found in profile with id ${profileId} wishlist`)
+        }
+        return await this.wishlistService.removeMovieFromWishlist(wishlist[0], movie);
+    }
+
+    async getMoviesFromProfilesWishlist(id: number, profileId: number){
+        const user: User[] = await this.usersService.find(null,id)
+
+        if(user.length===0){
+            throw new NotFoundException(`User with id ${id} not found`);
+        }
+        const currentProfile = user[0].profiles.filter(pro=>pro.id===profileId);
+        if(currentProfile.length===0){
+            throw new NotFoundException(`Profile with id ${profileId} not found for user with id ${id}`)
+        }
+        const profile = await this.profilesService.find(currentProfile[0].id);
+        const wishlist = await this.wishlistService.findWishlist(profile[0].wishlist);
+        return wishlist[0].movies;
     }
 }

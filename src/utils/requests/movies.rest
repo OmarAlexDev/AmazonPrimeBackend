@@ -4,8 +4,9 @@ Content-Type: application/json; charset=utf-8
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MkB0ZXN0LmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxMjAyMjU0OSwiZXhwIjoxNzEyMDI2MTQ5fQ.IahVsAFEZfyn55ePvUmKP3DMbU1247qJr5s3zv8ENXc
 
 {
-    "title": "Avengers Endgame",
-    "year": 2021
+    "title": "Wanted",
+    "year": 2008,
+    "starring": ["Angelina Jolie","James McAvoy"]
 }
 
 ### Update movie

@@ -3,21 +3,21 @@ import { ProfilesService } from './profiles.service';
 
 @Controller('profiles')
 export class ProfilesController {
-    constructor(private repo: ProfilesService){}
+    constructor(private profilesService: ProfilesService){}
 
     @Get()
     getProfiles(){
-        return this.repo.findAll()
+        return this.profilesService.findAll()
     }
 
     @Get('/:id')
     getProfile(@Param('id') id: string){
-        return this.repo.find(Number(id))
+        return this.profilesService.find(Number(id))
     }
 
     @Delete('/:id')
     deleteProfile(@Param('id') id: string){
-        return this.repo.deleteProfile({id: Number(id)})
+        return this.profilesService.deleteProfile({id: Number(id)})
     }
 
 }

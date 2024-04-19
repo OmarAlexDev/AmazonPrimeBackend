@@ -1,24 +1,15 @@
-import { Controller, Get, Param, NotFoundException, ConflictException, Post, Body, UseInterceptors, Delete } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, UseInterceptors, Delete } from '@nestjs/common';
 import { AccountService } from './account.service';
-import { UsersService } from 'src/users/users.service';
-import { ProfilesService } from 'src/profiles/profiles.service';
 import { CreateProfileDto } from 'src/utils/dtos/profile/create-profile.dto';
-import { WishlistService } from 'src/wishlist/wishlist.service';
-import { User, Profile } from 'src/entities';
 import { CreateUserDto } from 'src/utils/dtos/users/create-user.dto';
-import { AuthService } from 'src/auth/auth.service';
 import { ResponseUserDto } from 'src/utils/dtos/users/response-user.dto';
 import { SerializerInterceptor } from 'src/utils/interceptors/serialize.interceptor';
 import { SignInUserDto } from 'src/utils/dtos/users/signin-user.dto';
+import { AddMovieToWishlistDTO } from 'src/utils/dtos/wishlist/add-movie.dto';
 
 @Controller('account')
 export class AccountController {
-    constructor(
-        private accountService: AccountService, 
-        private usersService: UsersService, 
-        private profilesService: ProfilesService, 
-        private wishlistService: WishlistService,
-        private authService: AuthService){}
+    constructor(private accountService: AccountService){}
 
     @UseInterceptors(new SerializerInterceptor(ResponseUserDto))
     @Post('sign-up')
@@ -43,6 +34,21 @@ export class AccountController {
 
     @Delete(':id/profiles/:profileId')
     async removeProfileFromAccount(@Param('id') id: string, @Param('profileId') profileId: string){
-        return this.accountService.removeProfileFromAccount(Number(id), profileId);
+        return this.accountService.removeProfileFromAccount(Number(id), Number(profileId));
+    }
+
+    @Post(':id/profiles/:profileId/movies')
+    async addMovieToProfilesWishlist(@Param('id') id:string, @Param('profileId') profileId: string, @Body() body: AddMovieToWishlistDTO){
+        return this.accountService.addMovieToProfilesWishlist(Number(id),Number(profileId), Number(body.movieId))
+    }
+
+    @Delete(':id/profiles/:profileId/movies')
+    async removeMovieFromProfilesWishlist(@Param('id') id:string, @Param('profileId') profileId: string, @Body() body: AddMovieToWishlistDTO){
+        return this.accountService.removeMovieFromProfilesWishlist(Number(id),Number(profileId), Number(body.movieId))
+    }
+
+    @Get(':id/profiles/:profileId/movies')
+    async getMoviesFromProfilesWishlist(@Param('id') id:string, @Param('profileId') profileId: string){
+        return this.accountService.getMoviesFromProfilesWishlist(Number(id),Number(profileId))
     }
 }

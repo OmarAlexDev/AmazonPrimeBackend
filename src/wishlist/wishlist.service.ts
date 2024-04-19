@@ -3,6 +3,7 @@ import { Wishlist } from 'src/entities';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateWishlistDto } from 'src/utils/dtos/wishlist/create-wishlist.dto';
+import { Movie } from 'src/entities';
 
 @Injectable()
 export class WishlistService {
@@ -15,6 +16,25 @@ export class WishlistService {
 
     async deleteWishlist(wishlist: Partial<Wishlist>){
         return await this.repo.delete(wishlist);
+    }
+
+    async findWishlist(wishlist: Partial<Wishlist>){
+        return await this.repo.find({
+            where: [
+                {id: wishlist.id}
+            ],
+            relations: {movies:true}
+        })
+    }
+
+    async addMovieToWishlist(wishlist : Wishlist, movie : Movie){
+        wishlist.movies ? wishlist.movies.push(movie) : wishlist.movies = [movie];
+        return this.repo.save(wishlist);
+    }
+
+    async removeMovieFromWishlist(wishlist : Wishlist, movie : Movie){
+        wishlist.movies = wishlist.movies.filter(mov=>mov.id!==movie.id)
+        return this.repo.save(wishlist);
     }
 
 }
