@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, Body, UseInterceptors, Delete } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Patch, UseInterceptors, Delete } from '@nestjs/common';
 import { AccountService } from './account.service';
 import { CreateProfileDto } from 'src/utils/dtos/profile/create-profile.dto';
 import { CreateUserDto } from 'src/utils/dtos/users/create-user.dto';
@@ -6,6 +6,7 @@ import { ResponseUserDto } from 'src/utils/dtos/users/response-user.dto';
 import { SerializerInterceptor } from 'src/utils/interceptors/serialize.interceptor';
 import { SignInUserDto } from 'src/utils/dtos/users/signin-user.dto';
 import { AddMovieToWishlistDTO } from 'src/utils/dtos/wishlist/add-movie.dto';
+import { UpdateProfileDto } from 'src/utils/dtos/profile/update-profile.dto';
 
 @Controller('account')
 export class AccountController {
@@ -22,6 +23,11 @@ export class AccountController {
         return this.accountService.enterAccount(body);
     }
 
+    @Delete(':id')
+    async deleteAccount(@Param('id') id: string){
+        return this.accountService.deleteAccount(Number(id));
+    }
+
     @Get(':id/profiles')
     async getAccountProfiles(@Param('id') id: string){
         return this.accountService.getAccountProfiles(Number(id));
@@ -35,6 +41,11 @@ export class AccountController {
     @Delete(':id/profiles/:profileId')
     async removeProfileFromAccount(@Param('id') id: string, @Param('profileId') profileId: string){
         return this.accountService.removeProfileFromAccount(Number(id), Number(profileId));
+    }
+
+    @Patch(':id/profiles/:profileId')
+    async updateProfileFromAccount(@Param('id') id:string, @Param('profileId') profileId: string, @Body() body: UpdateProfileDto){
+        return this.accountService.updateProfileFromAccount(Number(id), Number(profileId), body)
     }
 
     @Post(':id/profiles/:profileId/movies')

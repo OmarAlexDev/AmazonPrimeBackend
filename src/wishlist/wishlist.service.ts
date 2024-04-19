@@ -18,6 +18,10 @@ export class WishlistService {
         return await this.repo.delete(wishlist);
     }
 
+    async deleteWishlists(wishlists: Wishlist []){
+        return await this.repo.remove(wishlists);
+    }
+
     async findWishlist(wishlist: Partial<Wishlist>){
         return await this.repo.find({
             where: [

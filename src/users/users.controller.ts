@@ -21,10 +21,11 @@ export class UsersController {
 
     @Delete('/:id')
     async deleteUser(@Param('id') id: string){
-        if(!await this.usersService.find(null, Number(id))){
+        const existingUser = await this.usersService.find(null, Number(id));
+        if(!existingUser){
             throw new NotFoundException('User with given Id does not exists');
         }
-        return await this.usersService.deleteUser(Number(id));
+        return await this.usersService.deleteUser(existingUser[0]);
     }
 
 }

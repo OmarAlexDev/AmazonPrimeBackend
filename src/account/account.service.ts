@@ -8,6 +8,7 @@ import { SignInUserDto } from 'src/utils/dtos/users/signin-user.dto';
 import { CreateProfileDto } from 'src/utils/dtos/profile/create-profile.dto';
 import { Movie, User } from 'src/entities';
 import { MoviesService } from 'src/movies/movies.service';
+import { UpdateProfileDto } from 'src/utils/dtos/profile/update-profile.dto';
 
 @Injectable()
 export class AccountService {
@@ -28,6 +29,18 @@ export class AccountService {
         const newProfile = await this.profilesService.createProfile({username: newUser.firstName});
         await this.wishlistService.createWishlist({profile: newProfile});
         return await this.usersService.addProfileToUser(newUser, newProfile);
+    }
+
+    async deleteAccount(id: number){
+        const existingUser: User [] = await this.usersService.find(null,id);
+        if(existingUser.length === 0){
+            throw new NotFoundException(`User with id ${id} not found`);
+        }
+        const profilewishlists = await this.profilesService.getProfilesWishlists(existingUser[0].profiles);
+        await this.profilesService.deleteProfiles(existingUser[0].profiles);
+        await this.wishlistService.deleteWishlists(profilewishlists);
+        return await this.usersService.deleteUser(existingUser[0]);
+        /*Needs to be fixed*/
     }
 
     async enterAccount(body: SignInUserDto){
@@ -58,9 +71,11 @@ export class AccountService {
     async addProfileToAccount(id: number, body: CreateProfileDto){
         const user: User[] = await this.usersService.find(null,id);
         if(user.length===0){
-            throw new NotFoundException(`User with id ${id} not found`)
+            throw new NotFoundException(`User with id ${id} not found`);
         }else if(user[0].profiles.length>=3){
-            throw new ConflictException('Limit of profiles for a user reached')
+            throw new ConflictException('Limit of profiles for a user reached');
+        }else if(user[0].profiles.find(prof=>prof.username===body.username)){
+            throw new ConflictException('Username already in use for other profile');
         }
 
         const newProfile = await this.profilesService.createProfile(body);
@@ -83,6 +98,22 @@ export class AccountService {
         const wishlistToDelete = await this.profilesService.find(profileToDelete[0].id);
         await this.profilesService.deleteProfile({id: profileToDelete[0].id});
         return await this.wishlistService.deleteWishlist({id: wishlistToDelete[0].wishlist.id});
+    }
+
+    async updateProfileFromAccount(id: number, profileId: number, body:UpdateProfileDto){
+        const user: User[] = await this.usersService.find(null,id)
+
+        if(user.length===0){
+            throw new NotFoundException(`User with id ${id} not found`);
+        }else if(user[0].profiles.find(prof=>prof.username===body.username)){
+            throw new ConflictException('Username already in use for other profile');
+        }
+        const profileToDelete = user[0].profiles.filter(pro=>pro.id===profileId);
+        if(profileToDelete.length===0){
+            throw new NotFoundException(`Profile with id ${profileId} not found for user with id ${id}`)
+        }
+        const currentProfile = await this.profilesService.find(profileToDelete[0].id);
+        return await this.profilesService.updateProfile(currentProfile[0], body);
     }
 
     async addMovieToProfilesWishlist(id:number, profileId: number, movieId: number){

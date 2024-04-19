@@ -29,36 +29,8 @@ export class UsersService {
         return await this.repo.find()
     }
 
-    async deleteUser(id: number){
-        const userProfiles =  (
-            await this.dataSource
-            .createQueryBuilder()
-            .select("Id")
-            .from(Profile, "profile")
-            .where("userId = :id", { id: id })
-            .getRawMany()
-        ).map(el=>{return el.id});
-
-        if(userProfiles && userProfiles.length>0){
-            await this.dataSource.createQueryBuilder()
-            .delete()
-            .from(Profile)
-            .where("userId = :id", { id: id })
-            .execute();
-
-            await this.dataSource
-            .createQueryBuilder()
-            .delete()
-            .from(Wishlist)
-            .where("Id IN (:...userProfiles)",{userProfiles})
-            .execute();
-        }
-
-        return await this.dataSource.createQueryBuilder()
-            .delete()
-            .from(User)
-            .where("Id = :id",{id:id})
-            .execute();
+    async deleteUser(user: Partial<User>){
+        return await this.repo.delete(user);
     }
 
     addProfileToUser(user: User, profile: Profile){

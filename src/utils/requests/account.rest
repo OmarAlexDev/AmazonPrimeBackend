@@ -17,6 +17,10 @@ Content-Type: application/json; charset=utf-8
     "password": "test" 
 }
 
+### Delete account
+DELETE http://localhost:3001/account/2
+Content-Type: application/json; charset=utf-8
+
 ### Get account's profiles
 GET http://localhost:3001/account/1/profiles
 Content-Type: application/json; charset=utf-8
@@ -30,8 +34,16 @@ Content-Type: application/json; charset=utf-8
 }
 
 ### Delete profile from account
-DELETE http://localhost:3001/account/1/profiles/7
+DELETE http://localhost:3001/account/2/profiles/10
 Content-Type: application/json; charset=utf-8
+
+### Update profile from account
+PATCH http://localhost:3001/account/2/profiles/9
+Content-Type: application/json; charset=utf-8
+
+{
+    "username":"friend"
+}
 
 ### Get movies from profile´s wishlist
 GET http://localhost:3001/account/2/profiles/9/movies
