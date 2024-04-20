@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { Movie } from 'src/entities';
+import { Movie } from 'src/utils/entities';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateMovieDto } from 'src/utils/dtos/movies/create-movie.dto';
 

@@ -18,7 +18,7 @@ Content-Type: application/json; charset=utf-8
 }
 
 ### Delete account
-DELETE http://localhost:3001/account/2
+DELETE http://localhost:3001/account/1
 Content-Type: application/json; charset=utf-8
 
 ### Get account's profiles
@@ -26,11 +26,11 @@ GET http://localhost:3001/account/1/profiles
 Content-Type: application/json; charset=utf-8
 
 ### Add profile to account
-POST http://localhost:3001/account/2/profiles
+POST http://localhost:3001/account/3/profiles
 Content-Type: application/json; charset=utf-8
 
 {
-    "username": "girlfriend"
+    "username": "aunt"
 }
 
 ### Delete profile from account
@@ -46,11 +46,11 @@ Content-Type: application/json; charset=utf-8
 }
 
 ### Get movies from profile´s wishlist
-GET http://localhost:3001/account/2/profiles/9/movies
+GET http://localhost:3001/account/3/profiles/16/wishlist
 Content-Type: application/json; charset=utf-8
 
 ### Add movie to profile´s wishlist
-POST http://localhost:3001/account/1/profiles/9/movies
+POST http://localhost:3001/account/3/profiles/16/wishlist
 Content-Type: application/json; charset=utf-8
 
 {
@@ -58,7 +58,7 @@ Content-Type: application/json; charset=utf-8
 }
 
 ### Remove movie from profile´s wishlist
-Delete http://localhost:3001/account/1/profiles/1/movies
+Delete http://localhost:3001/account/1/profiles/1/wishlist
 Content-Type: application/json; charset=utf-8
 
 {

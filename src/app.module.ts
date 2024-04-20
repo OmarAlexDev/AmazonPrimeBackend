@@ -9,7 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { WishlistModule } from './wishlist/wishlist.module';
 import { MoviesModule } from './movies/movies.module';
-import { Movie, Profile, User, Wishlist } from './entities';
+import { Movie, Profile, User, Wishlist } from './utils/entities';
 import { ProfilesModule } from './profiles/profiles.module';
 import { AccountModule } from './account/account.module';
 

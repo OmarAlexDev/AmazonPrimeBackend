@@ -1,5 +1,5 @@
 import {Expose} from 'class-transformer'
-import { Wishlist } from 'src/entities';
+import { Wishlist } from 'src/utils/entities';
 
 export class ResponseUserDto{
 

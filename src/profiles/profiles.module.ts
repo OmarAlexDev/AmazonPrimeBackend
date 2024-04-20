@@ -1,5 +1,5 @@
 import { Module, forwardRef } from '@nestjs/common';
-import { Profile } from 'src/entities';
+import { Profile } from 'src/utils/entities';
 import { ProfilesController } from './profiles.controller';
 import { ProfilesService } from './profiles.service';
 import { TypeOrmModule } from '@nestjs/typeorm';

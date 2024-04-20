@@ -7,6 +7,7 @@ import { SerializerInterceptor } from 'src/utils/interceptors/serialize.intercep
 import { SignInUserDto } from 'src/utils/dtos/users/signin-user.dto';
 import { AddMovieToWishlistDTO } from 'src/utils/dtos/wishlist/add-movie.dto';
 import { UpdateProfileDto } from 'src/utils/dtos/profile/update-profile.dto';
+import { IdentifierMovieDto } from 'src/utils/dtos/movies/identifier-movie.dto';
 
 @Controller('account')
 export class AccountController {
@@ -48,17 +49,18 @@ export class AccountController {
         return this.accountService.updateProfileFromAccount(Number(id), Number(profileId), body)
     }
 
-    @Post(':id/profiles/:profileId/movies')
+    @Post(':id/profiles/:profileId/wishlist')
     async addMovieToProfilesWishlist(@Param('id') id:string, @Param('profileId') profileId: string, @Body() body: AddMovieToWishlistDTO){
         return this.accountService.addMovieToProfilesWishlist(Number(id),Number(profileId), Number(body.movieId))
     }
 
-    @Delete(':id/profiles/:profileId/movies')
+    @Delete(':id/profiles/:profileId/wishlist')
     async removeMovieFromProfilesWishlist(@Param('id') id:string, @Param('profileId') profileId: string, @Body() body: AddMovieToWishlistDTO){
         return this.accountService.removeMovieFromProfilesWishlist(Number(id),Number(profileId), Number(body.movieId))
     }
 
-    @Get(':id/profiles/:profileId/movies')
+    @Get(':id/profiles/:profileId/wishlist')
+    @UseInterceptors(new SerializerInterceptor(IdentifierMovieDto))
     async getMoviesFromProfilesWishlist(@Param('id') id:string, @Param('profileId') profileId: string){
         return this.accountService.getMoviesFromProfilesWishlist(Number(id),Number(profileId))
     }

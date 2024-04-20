@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { Wishlist } from 'src/entities';
+import { Wishlist } from 'src/utils/entities';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateWishlistDto } from 'src/utils/dtos/wishlist/create-wishlist.dto';
-import { Movie } from 'src/entities';
+import { Movie } from 'src/utils/entities';
 
 @Injectable()
 export class WishlistService {

@@ -6,7 +6,7 @@ import { AuthService } from 'src/auth/auth.service';
 import { CreateUserDto } from 'src/utils/dtos/users/create-user.dto';
 import { SignInUserDto } from 'src/utils/dtos/users/signin-user.dto';
 import { CreateProfileDto } from 'src/utils/dtos/profile/create-profile.dto';
-import { Movie, User } from 'src/entities';
+import { Movie, User } from 'src/utils/entities';
 import { MoviesService } from 'src/movies/movies.service';
 import { UpdateProfileDto } from 'src/utils/dtos/profile/update-profile.dto';
 
@@ -38,9 +38,8 @@ export class AccountService {
         }
         const profilewishlists = await this.profilesService.getProfilesWishlists(existingUser[0].profiles);
         await this.profilesService.deleteProfiles(existingUser[0].profiles);
-        await this.wishlistService.deleteWishlists(profilewishlists);
-        return await this.usersService.deleteUser(existingUser[0]);
-        /*Needs to be fixed*/
+        await this.usersService.deleteUser({id: existingUser[0].id});
+        return this.wishlistService.deleteWishlists(profilewishlists);
     }
 
     async enterAccount(body: SignInUserDto){
@@ -160,6 +159,7 @@ export class AccountService {
         return await this.wishlistService.removeMovieFromWishlist(wishlist[0], movie);
     }
 
+    
     async getMoviesFromProfilesWishlist(id: number, profileId: number){
         const user: User[] = await this.usersService.find(null,id)
 
