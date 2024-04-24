@@ -1,28 +1,16 @@
-import { Controller, Get, Param, Post, Body, Patch, UseInterceptors, Delete } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Patch, UseInterceptors, Delete, UseGuards } from '@nestjs/common';
 import { AccountService } from './account.service';
 import { CreateProfileDto } from 'src/utils/dtos/profile/create-profile.dto';
-import { CreateUserDto } from 'src/utils/dtos/users/create-user.dto';
-import { ResponseUserDto } from 'src/utils/dtos/users/response-user.dto';
 import { SerializerInterceptor } from 'src/utils/interceptors/serialize.interceptor';
-import { SignInUserDto } from 'src/utils/dtos/users/signin-user.dto';
 import { AddMovieToWishlistDTO } from 'src/utils/dtos/wishlist/add-movie.dto';
 import { UpdateProfileDto } from 'src/utils/dtos/profile/update-profile.dto';
 import { IdentifierMovieDto } from 'src/utils/dtos/movies/identifier-movie.dto';
+import { AuthGuard } from 'src/utils/guards/auth.guard';
 
+@UseGuards(AuthGuard)
 @Controller('account')
 export class AccountController {
     constructor(private accountService: AccountService){}
-
-    @UseInterceptors(new SerializerInterceptor(ResponseUserDto))
-    @Post('sign-up')
-    async createAccount(@Body() body: CreateUserDto){
-        return this.accountService.createAccount(body);
-    }
-
-    @Post('sign-in')
-    async enterAccount(@Body() body: SignInUserDto){
-        return this.accountService.enterAccount(body);
-    }
 
     @Delete(':id')
     async deleteAccount(@Param('id') id: string){

@@ -5,7 +5,7 @@ import { AuthService } from 'src/auth/auth.service';
 @Injectable()
 export class AdminGuard implements CanActivate {
 
-    constructor(private authService: AuthService){}
+  constructor(private authService: AuthService){}
 
   canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
     const request = context.switchToHttp().getRequest();

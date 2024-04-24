@@ -2,9 +2,6 @@ import { Injectable, NotFoundException, ConflictException } from '@nestjs/common
 import { UsersService } from 'src/users/users.service';
 import { ProfilesService } from 'src/profiles/profiles.service';
 import { WishlistService } from 'src/wishlist/wishlist.service';
-import { AuthService } from 'src/auth/auth.service';
-import { CreateUserDto } from 'src/utils/dtos/users/create-user.dto';
-import { SignInUserDto } from 'src/utils/dtos/users/signin-user.dto';
 import { CreateProfileDto } from 'src/utils/dtos/profile/create-profile.dto';
 import { Movie, User } from 'src/utils/entities';
 import { MoviesService } from 'src/movies/movies.service';
@@ -16,20 +13,7 @@ export class AccountService {
         private usersService: UsersService, 
         private profilesService: ProfilesService, 
         private wishlistService: WishlistService,
-        private authService: AuthService,
         private moviesService: MoviesService){}
-
-    async createAccount(body: CreateUserDto){
-        const existingUser: User [] = await this.usersService.find(body.email,null);
-        if(existingUser.length > 0){
-            throw new NotFoundException(`User with email ${body.email} already exists`)
-        }
-        body.password =  await this.authService.encrypt(body);
-        const newUser =  await this.usersService.createUser(body)
-        const newProfile = await this.profilesService.createProfile({username: newUser.firstName});
-        await this.wishlistService.createWishlist({profile: newProfile});
-        return await this.usersService.addProfileToUser(newUser, newProfile);
-    }
 
     async deleteAccount(id: number){
         const existingUser: User [] = await this.usersService.find(null,id);
@@ -40,23 +24,6 @@ export class AccountService {
         await this.profilesService.deleteProfiles(existingUser[0].profiles);
         await this.usersService.deleteUser({id: existingUser[0].id});
         return this.wishlistService.deleteWishlists(profilewishlists);
-    }
-
-    async enterAccount(body: SignInUserDto){
-        const existingUser: User []  = await this.usersService.find(body.email,null);
-        if(existingUser.length===0){
-            throw new NotFoundException(`User with email ${body.email} not found`)
-        }
-        if(!this.authService.decrypt(body.password,existingUser[0].password)){
-            throw new NotFoundException("Incorrect password")
-        }
-        const token = this.authService.generateToken(existingUser[0])
-
-        return {
-            token: token,
-            id: existingUser[0].id,
-            email: existingUser[0].email
-        }
     }
 
     async getAccountProfiles(id: number){

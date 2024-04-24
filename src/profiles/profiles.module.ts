@@ -1,9 +1,9 @@
-import { Module, forwardRef } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { Profile } from 'src/utils/entities';
 import { ProfilesController } from './profiles.controller';
 import { ProfilesService } from './profiles.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { WishlistModule } from 'src/wishlist/wishlist.module';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
   controllers: [ProfilesController],

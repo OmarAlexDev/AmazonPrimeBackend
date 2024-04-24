@@ -1,4 +1,4 @@
-import { Controller, ConflictException, UseInterceptors, Param, Put, NotFoundException, Delete } from '@nestjs/common';
+import { Controller, ConflictException, UseInterceptors, Param, Put, NotFoundException, Delete, UseGuards } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import {Body, Post, Get, Query} from '@nestjs/common'
 import { CreateMovieDto } from 'src/utils/dtos/movies/create-movie.dto';
@@ -6,12 +6,13 @@ import { FilterMovie } from 'src/utils/dtos/movies/filter-movie.dto';
 import { UpdateMovieDto } from 'src/utils/dtos/movies/update-movie.dto';
 import { SerializerInterceptor } from 'src/utils/interceptors/serialize.interceptor';
 import { ResponseMovieDto } from 'src/utils/dtos/movies/response-movie.dto';
+import { AdminGuard } from 'src/utils/guards/admin.guard';
 
+@UseGuards(AdminGuard)
 @UseInterceptors(new SerializerInterceptor(ResponseMovieDto))
 @Controller('movies')
 export class MoviesController {
     constructor(private moviesService : MoviesService){}
-
 
     @Post()
     async createMovie(@Body() body: CreateMovieDto){

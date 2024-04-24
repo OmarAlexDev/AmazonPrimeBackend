@@ -1,29 +1,12 @@
-### Create account
-POST http://localhost:3001/account/sign-up
-Content-Type: application/json; charset=utf-8
-
-{
-    "email": "test2@test.com",  
-    "password": "test" ,   
-    "firstName": "Omar"
-}
-
-### Generate account's token
-POST http://localhost:3001/account/sign-in
-Content-Type: application/json; charset=utf-8
-
-{
-    "email": "test6@test.com",
-    "password": "test" 
-}
-
 ### Delete account
 DELETE http://localhost:3001/account/1
 Content-Type: application/json; charset=utf-8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTM5Mzc3MzcsImV4cCI6MTcxMzk0MTMzN30.4V21nGh1EcPojKXf0_wJMf30e_A-_gud-cDpZrRnItM
 
 ### Get account's profiles
-GET http://localhost:3001/account/1/profiles
+GET http://localhost:3001/account/2/profiles
 Content-Type: application/json; charset=utf-8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTM5Mzc3MzcsImV4cCI6MTcxMzk0MTMzN30.4V21nGh1EcPojKXf0_wJMf30e_A-_gud-cDpZrRnItM
 
 ### Add profile to account
 POST http://localhost:3001/account/3/profiles

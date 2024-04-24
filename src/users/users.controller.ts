@@ -1,8 +1,7 @@
-import {Post,   Delete, Get, Put, Body, Param,Controller, NotFoundException, UseInterceptors, UseGuards} from '@nestjs/common'
+import { Delete, Get, Put, Post, Param,Controller, NotFoundException, UseInterceptors} from '@nestjs/common'
 import { SerializerInterceptor } from 'src/utils/interceptors/serialize.interceptor';
 import { ResponseUserDto } from '../utils/dtos/users/response-user.dto';
 import { UsersService } from './users.service';
-
 
 @UseInterceptors(new SerializerInterceptor(ResponseUserDto))
 @Controller('users')
@@ -26,6 +25,16 @@ export class UsersController {
             throw new NotFoundException('User with given Id does not exists');
         }
         return await this.usersService.deleteUser(existingUser[0]);
+    }
+
+    @Post()
+    async createUser(){
+
+    }
+
+    @Put('/:id')
+    async updateUser(){
+
     }
 
 }

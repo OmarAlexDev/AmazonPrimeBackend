@@ -1,14 +1,14 @@
-### Create user
+### Create account
 POST http://localhost:3001/auth/sign-up
 Content-Type: application/json; charset=utf-8
 
 {
     "email": "test1@test.com",  
     "password": "test" ,   
-    "firstName": "Alejandro"
+    "firstName": "Omar"
 }
 
-### Sign user
+### Generate account's token
 POST http://localhost:3001/auth/sign-in
 Content-Type: application/json; charset=utf-8
 
