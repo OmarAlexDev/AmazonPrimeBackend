@@ -1,14 +1,12 @@
-import { Injectable, CanActivate, ExecutionContext, NotFoundException } from '@nestjs/common';
+import { CanActivate, ExecutionContext } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { AuthService } from 'src/auth/auth.service';
 
-@Injectable()
+
 export class AuthGuard implements CanActivate {
-
-    constructor(private authService: AuthService){}
 
   canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
     const request = context.switchToHttp().getRequest();
-    return request.raw.token ? this.authService.verifyToken(request.raw.token) : false;  
+    const requestedAccount = Number((request.raw.url.split('/'))[2]);
+    return request.raw.currUser.id && (requestedAccount===request.raw.currUser.id || request.raw.currUser.isAdmin===true) ? true : false;  
   }
 }

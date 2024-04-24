@@ -1,8 +1,11 @@
-import { Delete, Get, Put, Post, Param,Controller, NotFoundException, UseInterceptors} from '@nestjs/common'
+import { Delete, Get, Put, Post, Param,Controller, NotFoundException, UseInterceptors, Body, UseGuards} from '@nestjs/common'
 import { SerializerInterceptor } from 'src/utils/interceptors/serialize.interceptor';
 import { ResponseUserDto } from '../utils/dtos/users/response-user.dto';
+import { CreateUserDto } from 'src/utils/dtos/users/create-user.dto';
 import { UsersService } from './users.service';
+import { AdminGuard } from 'src/utils/guards/admin.guard';
 
+@UseGuards(AdminGuard)
 @UseInterceptors(new SerializerInterceptor(ResponseUserDto))
 @Controller('users')
 export class UsersController {
@@ -28,7 +31,7 @@ export class UsersController {
     }
 
     @Post()
-    async createUser(){
+    async createUser(@Body() body: CreateUserDto){
 
     }
 

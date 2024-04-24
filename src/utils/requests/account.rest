@@ -4,9 +4,9 @@ Content-Type: application/json; charset=utf-8
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTM5Mzc3MzcsImV4cCI6MTcxMzk0MTMzN30.4V21nGh1EcPojKXf0_wJMf30e_A-_gud-cDpZrRnItM
 
 ### Get account's profiles
-GET http://localhost:3001/account/2/profiles
+GET http://localhost:3001/account/3/profiles
 Content-Type: application/json; charset=utf-8
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTM5Mzc3MzcsImV4cCI6MTcxMzk0MTMzN30.4V21nGh1EcPojKXf0_wJMf30e_A-_gud-cDpZrRnItM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTM5OTY0MTAsImV4cCI6MTcxNDAwMDAxMH0.MKb-Z8tiRM_T8_QxI8D64OfX527ANJzaJZmXYBAog_g
 
 ### Add profile to account
 POST http://localhost:3001/account/3/profiles
