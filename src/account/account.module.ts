@@ -10,6 +10,6 @@ import { AuthModule } from 'src/auth/auth.module';
 @Module({
   controllers: [AccountController],
   providers: [AccountService],
-  imports: [UsersModule, MoviesModule, ProfilesModule, WishlistModule, AuthModule]
+  imports: [UsersModule, MoviesModule, ProfilesModule, WishlistModule]
 })
 export class AccountModule {}

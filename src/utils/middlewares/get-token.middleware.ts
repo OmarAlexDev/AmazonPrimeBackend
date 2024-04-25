@@ -1,6 +1,6 @@
 import { NestMiddleware, Injectable } from "@nestjs/common";
 import { FastifyRequest, FastifyReply } from 'fastify';
-import { AuthService } from "src/auth/auth.service";
+import {verifyToken} from 'src/utils/functions/jwt';
 
 type IUser = {
   id: number,
@@ -15,11 +15,9 @@ interface RequestCustom extends FastifyRequest {
 @Injectable()
 export class GetToken implements NestMiddleware{
 
-    constructor(private authService: AuthService){}
-
     use(req: RequestCustom, res: FastifyReply['raw'], next: () => void) {
         if(req.headers.authorization && req.headers.authorization.toLowerCase().startsWith('bearer ')){
-          const tokenContents: IUser = this.authService.verifyToken(req.headers.authorization.replace('Bearer ',''));
+          const tokenContents: IUser = verifyToken(req.headers.authorization.replace('Bearer ',''));
           req.currUser = tokenContents;
         }
         next();

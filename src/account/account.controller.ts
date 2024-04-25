@@ -6,6 +6,7 @@ import { AddMovieToWishlistDTO } from 'src/utils/dtos/wishlist/add-movie.dto';
 import { UpdateProfileDto } from 'src/utils/dtos/profile/update-profile.dto';
 import { IdentifierMovieDto } from 'src/utils/dtos/movies/identifier-movie.dto';
 import { AuthGuard } from 'src/utils/guards/auth.guard';
+import { UpdateUserDto } from 'src/utils/dtos/users/update-user.dto';
 
 @UseGuards(AuthGuard)
 @Controller('account')
@@ -15,6 +16,11 @@ export class AccountController {
     @Delete(':id')
     async deleteAccount(@Param('id') id: string){
         return this.accountService.deleteAccount(Number(id));
+    }
+
+    @Patch(':id')
+    async updateAccountUser(@Param('id') id: string, @Body() body: UpdateUserDto){
+        return this.accountService.updateAccountsUser(Number(id), body);
     }
 
     @Get(':id/profiles')

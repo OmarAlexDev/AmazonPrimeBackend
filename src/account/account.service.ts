@@ -6,6 +6,7 @@ import { CreateProfileDto } from 'src/utils/dtos/profile/create-profile.dto';
 import { Movie, User } from 'src/utils/entities';
 import { MoviesService } from 'src/movies/movies.service';
 import { UpdateProfileDto } from 'src/utils/dtos/profile/update-profile.dto';
+import { UpdateUserDto } from 'src/utils/dtos/users/update-user.dto';
 
 @Injectable()
 export class AccountService {
@@ -24,6 +25,14 @@ export class AccountService {
         await this.profilesService.deleteProfiles(existingUser[0].profiles);
         await this.usersService.deleteUser({id: existingUser[0].id});
         return this.wishlistService.deleteWishlists(profilewishlists);
+    }
+
+    async updateAccountsUser(id: number, body: UpdateUserDto){ 
+        const existingUser: User [] = await this.usersService.find(null,id);
+        if(existingUser.length === 0){
+            throw new NotFoundException(`User with id ${id} not found`);
+        }
+        return await this.usersService.updateUser(existingUser[0].id, body);
     }
 
     async getAccountProfiles(id: number){
@@ -79,7 +88,7 @@ export class AccountService {
             throw new NotFoundException(`Profile with id ${profileId} not found for user with id ${id}`)
         }
         const currentProfile = await this.profilesService.find(profileToDelete[0].id);
-        return await this.profilesService.updateProfile(currentProfile[0], body);
+        return await this.profilesService.updateProfile(currentProfile[0].id, body);
     }
 
     async addMovieToProfilesWishlist(id:number, profileId: number, movieId: number){

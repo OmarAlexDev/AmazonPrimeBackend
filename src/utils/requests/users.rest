@@ -6,6 +6,15 @@ Content-Type: application/json; charset=utf-8
 GET http://localhost:3001/users/2
 Content-Type: application/json; charset=utf-8
 
+### Update user
+PATCH http://localhost:3001/users/3
+Content-Type: application/json; charset=utf-8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MkB0ZXN0LmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNDAyMjA1OCwiZXhwIjoxNzE0MDI1NjU4fQ.oVstKLBmKBV3n6UYmOGKmw1CCbTgXd3r8R3x5iwIY6o
+
+{
+    "isAdmin": false
+}
+
 ### Delete user
 DELETE http://localhost:3001/users/1
 Content-Type: application/json; charset=utf-8

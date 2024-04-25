@@ -10,7 +10,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiO
 }
 
 ### Update movie
-PUT http://localhost:3001/movies/5
+PATCH  http://localhost:3001/movies/5
 Content-Type: application/json; charset=utf-8
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MkB0ZXN0LmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxMjAyMjU0OSwiZXhwIjoxNzEyMDI2MTQ5fQ.IahVsAFEZfyn55ePvUmKP3DMbU1247qJr5s3zv8ENXc
 

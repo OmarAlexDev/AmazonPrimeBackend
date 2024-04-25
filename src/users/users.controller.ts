@@ -1,9 +1,11 @@
-import { Delete, Get, Put, Post, Param,Controller, NotFoundException, UseInterceptors, Body, UseGuards} from '@nestjs/common'
+import { Delete, Get, Patch, Post, Param,Controller, NotFoundException, UseInterceptors, Body, UseGuards} from '@nestjs/common'
 import { SerializerInterceptor } from 'src/utils/interceptors/serialize.interceptor';
 import { ResponseUserDto } from '../utils/dtos/users/response-user.dto';
 import { CreateUserDto } from 'src/utils/dtos/users/create-user.dto';
 import { UsersService } from './users.service';
 import { AdminGuard } from 'src/utils/guards/admin.guard';
+import { AdminUpdateUserDto } from 'src/utils/dtos/users/admin-update-user.dto';
+import { AdminCreateUserDto } from 'src/utils/dtos/users/create-user-admin.dto';
 
 @UseGuards(AdminGuard)
 @UseInterceptors(new SerializerInterceptor(ResponseUserDto))
@@ -31,13 +33,13 @@ export class UsersController {
     }
 
     @Post()
-    async createUser(@Body() body: CreateUserDto){
+    async createUser(@Body() body: AdminCreateUserDto){
 
     }
 
-    @Put('/:id')
-    async updateUser(){
-
+    @Patch('/:id')
+    async updateUser(@Param('id') id: string, @Body() body: AdminUpdateUserDto){
+        return this.usersService.updateUser(Number(id),body)
     }
 
 }

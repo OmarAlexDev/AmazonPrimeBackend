@@ -18,7 +18,7 @@ export class AuthController {
 
     @Post('sign-in')
     async enterAccount(@Body() body: SignInUserDto){
-        return this.authService.generateToken(body);
+        return this.authService.getUserToken(body);
     }
 }
 

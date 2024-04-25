@@ -1,4 +1,4 @@
-import { Controller, ConflictException, UseInterceptors, Param, Put, NotFoundException, Delete, UseGuards } from '@nestjs/common';
+import { Controller, ConflictException, UseInterceptors, Param, Patch, NotFoundException, Delete, UseGuards } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import {Body, Post, Get, Query} from '@nestjs/common'
 import { CreateMovieDto } from 'src/utils/dtos/movies/create-movie.dto';
@@ -23,7 +23,7 @@ export class MoviesController {
         return this.moviesService.createMovie(body);
     }
 
-    @Put('/:id')
+    @Patch('/:id')
     async updateMovie(@Param('id') id: string, @Body() body: UpdateMovieDto){
         const movie = await this.moviesService.findMovieById(Number(id));
         if(!movie){
@@ -48,7 +48,6 @@ export class MoviesController {
             throw new NotFoundException("Movie not found");
         }
 
-        await this.moviesService.deleteMovie(Number(id));
-        return JSON.stringify({"message": "Movie was successfully deleted."});
+        return await this.moviesService.deleteMovie(Number(id));
     }
 }

@@ -1,6 +1,6 @@
 import { IsString, IsOptional, IsEmail, IsBoolean } from "class-validator";
 
-export class CreateUserDto{
+export class AdminCreateUserDto{
 
     @IsString()
     @IsOptional()
@@ -18,4 +18,8 @@ export class CreateUserDto{
     @IsString()
     @IsOptional()
     lastName: string;
+
+    @IsBoolean()
+    @IsOptional()
+    isAdmin: boolean;
 }

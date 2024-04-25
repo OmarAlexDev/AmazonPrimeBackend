@@ -39,8 +39,8 @@ export class ProfilesService {
         return await this.repo.remove(profiles);
     }
 
-    async updateProfile(profile: Partial<Profile>, newProfile: Partial<Profile>){
-        return await this.repo.update(profile.id, newProfile);
+    async updateProfile(profileId: number, newProfile: Partial<Profile>){
+        return await this.repo.update(profileId, newProfile);
     }
 
     async getProfilesWishlists(profiles: Profile []){

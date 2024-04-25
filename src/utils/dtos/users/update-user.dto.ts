@@ -1,21 +1,25 @@
-import { IsString, IsOptional, IsEmail, IsBoolean } from "class-validator";
+import { IsString, IsOptional, IsEmail } from "class-validator";
 
-export class CreateUserDto{
+export class UpdateUserDto{
 
     @IsString()
     @IsOptional()
     phone: string;
 
     @IsEmail()
+    @IsOptional()
     email: string;
 
     @IsString()
+    @IsOptional()
     password: string;
 
     @IsString()
+    @IsOptional()
     firstName: string;
 
     @IsString()
     @IsOptional()
     lastName: string;
+
 }

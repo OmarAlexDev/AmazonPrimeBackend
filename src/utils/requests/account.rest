@@ -3,6 +3,15 @@ DELETE http://localhost:3001/account/1
 Content-Type: application/json; charset=utf-8
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTM5Mzc3MzcsImV4cCI6MTcxMzk0MTMzN30.4V21nGh1EcPojKXf0_wJMf30e_A-_gud-cDpZrRnItM
 
+### Update account´s user
+PATCH http://localhost:3001/account/1
+Content-Type:  application/json; charset=utf-8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTQwMjE0NDUsImV4cCI6MTcxNDAyNTA0NX0.SyRv7NeY1Qe3msCrY4VoHrM7jQCsQW_UKlzArbILrDw
+
+{
+    "password": "test",
+}
+
 ### Get account's profiles
 GET http://localhost:3001/account/3/profiles
 Content-Type: application/json; charset=utf-8

@@ -2,12 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm/repository/Repository';
 import { CreateUserDto } from '../utils/dtos/users/create-user.dto';
-import { User, Profile, Wishlist } from '../utils/entities';
-import { DataSource } from 'typeorm';
+import { User, Profile } from '../utils/entities';
+import { encrypt } from 'src/utils/functions/bcrypt';
 
 @Injectable()
 export class UsersService {
-    constructor(@InjectRepository(User) private repo: Repository<User>, private dataSource: DataSource){}
+    constructor(@InjectRepository(User) private repo: Repository<User>){}
 
     async createUser(user:CreateUserDto){
         const newUser = this.repo.create(user);
@@ -33,13 +33,20 @@ export class UsersService {
         return await this.repo.delete(user);
     }
 
-    addProfileToUser(user: User, profile: Profile){
+    async addProfileToUser(user: User, profile: Profile){
         user.profiles ? user.profiles.push(profile) : user.profiles = [profile]
         return this.repo.save(user);
     }
 
-    removeProfileFromUser(user: User, profile: Profile){
+    async removeProfileFromUser(user: User, profile: Profile){
         user.profiles  = user.profiles.filter(pro=>pro.id!==profile.id)
         return this.repo.save(user);
+    }
+
+    async updateUser(id: number, newUser: Partial<User>){
+        if(newUser.password){
+            newUser.password = await encrypt(newUser.password);
+        }
+        return await this.repo.update(id, newUser);
     }
 }
