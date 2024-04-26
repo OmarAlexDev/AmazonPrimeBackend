@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm/repository/Repository';
-import { CreateUserDto } from '../utils/dtos/users/create-user.dto';
+import { AdminCreateUserDto } from 'src/utils/dtos/users/create-user-admin.dto';
 import { User, Profile } from '../utils/entities';
 import { encrypt } from 'src/utils/functions/bcrypt';
 
@@ -9,7 +9,8 @@ import { encrypt } from 'src/utils/functions/bcrypt';
 export class UsersService {
     constructor(@InjectRepository(User) private repo: Repository<User>){}
 
-    async createUser(user:CreateUserDto){
+    async createUser(user:Partial <AdminCreateUserDto>){
+        user.password = await encrypt(user.password)
         const newUser = this.repo.create(user);
         return await this.repo.save(newUser);
     }

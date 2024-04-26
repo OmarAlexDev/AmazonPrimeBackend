@@ -3,10 +3,9 @@ POST http://localhost:3001/auth/sign-up
 Content-Type: application/json; charset=utf-8
 
 {
-    "email": "test2@test.com",  
+    "email": "test6@test.com",  
     "password": "test" ,   
-    "firstName": "Alex",
-    "isAdmin": true
+    "firstName": "test"
 }
 
 ### Generate account's token
