@@ -5,10 +5,10 @@ import { SerializerInterceptor } from 'src/utils/interceptors/serialize.intercep
 import { AddMovieToWishlistDTO } from 'src/utils/dtos/wishlist/add-movie.dto';
 import { UpdateProfileDto } from 'src/utils/dtos/profile/update-profile.dto';
 import { IdentifierMovieDto } from 'src/utils/dtos/movies/identifier-movie.dto';
-import { AuthGuard } from 'src/utils/guards/auth.guard';
+import { AccountGuard } from 'src/utils/guards/account.guard';
 import { UpdateUserDto } from 'src/utils/dtos/users/update-user.dto';
 
-@UseGuards(AuthGuard)
+@UseGuards(AccountGuard)
 @Controller('account')
 export class AccountController {
     constructor(private accountService: AccountService){}

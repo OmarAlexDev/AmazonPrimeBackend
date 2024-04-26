@@ -26,7 +26,7 @@ export class UsersController {
     async deleteUser(@Param('id') id: string){
         const existingUser = await this.usersService.find(null, Number(id));
         if(existingUser.length===0){
-            throw new NotFoundException('User with given Id does not exists');
+            throw new NotFoundException(`User with id ${id} does not exists`);
         }
         return await this.usersService.deleteUser(existingUser[0]);
     }
@@ -44,7 +44,7 @@ export class UsersController {
     async updateUser(@Param('id') id: string, @Body() body: AdminUpdateUserDto){
         const existingUser = await this.usersService.find(body.email, null);
         if(existingUser.length===0){
-            throw new NotFoundException('User with given Id does not exists');
+            throw new NotFoundException(`User with id ${id} does not exists`);
         }
         return this.usersService.updateUser(Number(id),body)
     }

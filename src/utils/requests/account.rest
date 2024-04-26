@@ -1,7 +1,7 @@
 ### Delete account
-DELETE http://localhost:3001/account/1
+DELETE http://localhost:3001/account/3
 Content-Type: application/json; charset=utf-8
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTM5Mzc3MzcsImV4cCI6MTcxMzk0MTMzN30.4V21nGh1EcPojKXf0_wJMf30e_A-_gud-cDpZrRnItM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MkB0ZXN0LmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNDEwNTMxMSwiZXhwIjoxNzE0MTA4OTExfQ.8G-2wkNMxdhoqz32g8mvAg1w_V0f_tgoOUadR4N0Lw4
 
 ### Update account´s user
 PATCH http://localhost:3001/account/1
@@ -13,13 +13,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiO
 }
 
 ### Get account's profiles
-GET http://localhost:3001/account/3/profiles
+GET http://localhost:3001/account/7/profiles
 Content-Type: application/json; charset=utf-8
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTM5OTY0MTAsImV4cCI6MTcxNDAwMDAxMH0.MKb-Z8tiRM_T8_QxI8D64OfX527ANJzaJZmXYBAog_g
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MkB0ZXN0LmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNDEwNTMxMSwiZXhwIjoxNzE0MTA4OTExfQ.8G-2wkNMxdhoqz32g8mvAg1w_V0f_tgoOUadR4N0Lw4
 
 ### Add profile to account
-POST http://localhost:3001/account/3/profiles
+POST http://localhost:3001/account/7/profiles
 Content-Type: application/json; charset=utf-8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MkB0ZXN0LmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNDEwNTMxMSwiZXhwIjoxNzE0MTA4OTExfQ.8G-2wkNMxdhoqz32g8mvAg1w_V0f_tgoOUadR4N0Lw4
 
 {
     "username": "aunt"
@@ -28,10 +29,12 @@ Content-Type: application/json; charset=utf-8
 ### Delete profile from account
 DELETE http://localhost:3001/account/2/profiles/10
 Content-Type: application/json; charset=utf-8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTM5OTY0MTAsImV4cCI6MTcxNDAwMDAxMH0.MKb-Z8tiRM_T8_QxI8D64OfX527ANJzaJZmXYBAog_g
 
 ### Update profile from account
 PATCH http://localhost:3001/account/2/profiles/9
 Content-Type: application/json; charset=utf-8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTM5OTY0MTAsImV4cCI6MTcxNDAwMDAxMH0.MKb-Z8tiRM_T8_QxI8D64OfX527ANJzaJZmXYBAog_g
 
 {
     "username":"friend"
@@ -40,10 +43,12 @@ Content-Type: application/json; charset=utf-8
 ### Get movies from profile´s wishlist
 GET http://localhost:3001/account/3/profiles/16/wishlist
 Content-Type: application/json; charset=utf-8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTM5OTY0MTAsImV4cCI6MTcxNDAwMDAxMH0.MKb-Z8tiRM_T8_QxI8D64OfX527ANJzaJZmXYBAog_g
 
 ### Add movie to profile´s wishlist
 POST http://localhost:3001/account/3/profiles/16/wishlist
 Content-Type: application/json; charset=utf-8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTM5OTY0MTAsImV4cCI6MTcxNDAwMDAxMH0.MKb-Z8tiRM_T8_QxI8D64OfX527ANJzaJZmXYBAog_g
 
 {
     "movieId":2
@@ -52,6 +57,7 @@ Content-Type: application/json; charset=utf-8
 ### Remove movie from profile´s wishlist
 Delete http://localhost:3001/account/1/profiles/1/wishlist
 Content-Type: application/json; charset=utf-8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTM5OTY0MTAsImV4cCI6MTcxNDAwMDAxMH0.MKb-Z8tiRM_T8_QxI8D64OfX527ANJzaJZmXYBAog_g
 
 {
     "movieId":2

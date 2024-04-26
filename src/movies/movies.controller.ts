@@ -7,13 +7,15 @@ import { UpdateMovieDto } from 'src/utils/dtos/movies/update-movie.dto';
 import { SerializerInterceptor } from 'src/utils/interceptors/serialize.interceptor';
 import { ResponseMovieDto } from 'src/utils/dtos/movies/response-movie.dto';
 import { AdminGuard } from 'src/utils/guards/admin.guard';
+import { SubscriptionGuard } from 'src/utils/guards/subscription.guard';
 
-@UseGuards(AdminGuard)
+
 @UseInterceptors(new SerializerInterceptor(ResponseMovieDto))
 @Controller('movies')
 export class MoviesController {
     constructor(private moviesService : MoviesService){}
 
+    @UseGuards(AdminGuard)
     @Post()
     async createMovie(@Body() body: CreateMovieDto){
         const movies = await this.moviesService.findMovie({title: body.title})
@@ -23,6 +25,7 @@ export class MoviesController {
         return this.moviesService.createMovie(body);
     }
 
+    @UseGuards(AdminGuard)
     @Patch('/:id')
     async updateMovie(@Param('id') id: string, @Body() body: UpdateMovieDto){
         const movie = await this.moviesService.findMovieById(Number(id));
@@ -32,16 +35,19 @@ export class MoviesController {
         return await this.moviesService.updateMovie(movie, body)
     }
 
+    @UseGuards(SubscriptionGuard)
     @Get()
     async getMovies(@Query() {title, categories, year, ageLimit, imdb, studio}: FilterMovie){
         return await this.moviesService.findMovie({title, categories, year, ageLimit, imdb, studio})
     }
 
+    @UseGuards(SubscriptionGuard)
     @Get('/:id')
     async getMovie(@Param('id') id: string){
         return await this.moviesService.findMovieById(Number(id));
     }
 
+    @UseGuards(AdminGuard)
     @Delete('/:id')
     async deleteMovie(@Param('id') id : string){
         if(!await this.moviesService.findMovieById(Number(id))){
