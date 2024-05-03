@@ -9,6 +9,7 @@ import { UpdateProfileDto } from 'src/utils/dtos/profile/update-profile.dto';
 import { UpdateUserDto } from 'src/utils/dtos/users/update-user.dto';
 import { HistoryService } from 'src/history/history.service';
 import { RecordService } from 'src/record/record.service';
+import { AddMovieToHistoryDTO } from 'src/utils/dtos/history/add-movie-history.dto';
 
 @Injectable()
 export class AccountService {
@@ -160,7 +161,7 @@ export class AccountService {
         return wishlist[0].movies;
     }
 
-    async addMovieToProfilesHistory(id:number, profileId: number, movieId: number){
+    async addMovieToProfilesHistory(id:number, profileId: number, {movieId, watch_time}: AddMovieToHistoryDTO){
         const user: User[] = await this.usersService.find(null,id)
         const movie: Movie = await this.moviesService.findMovieById(movieId)
 
@@ -174,16 +175,21 @@ export class AccountService {
             throw new NotFoundException(`Profile with id ${profileId} not found for user with id ${id}`)
         }
         const profile = await this.profilesService.find(currentProfile[0].id);
-        const history = await this.historyService.findHistory(profile[0].history);
-
-        if(history[0].records.find(obj=>obj.movie.id===movieId)){
-            throw new ConflictException('Movie already added to history')
+        const existentrecord = await this.recordService.findMovieInHistory(profile[0].history, movie)
+        if(existentrecord.length>0){
+            return await this.recordService.updateRecord(
+                existentrecord[0], 
+                {
+                    watch_time: watch_time ? watch_time : 0, 
+                    finished: existentrecord[0].finished === true || (watch_time && watch_time > 90) ? true :  false 
+                });
+        }else{
+            const record = await this.recordService.createRecord({movie: movie});
+            return await this.historyService.addMovieToHistory(profile[0].history, record);
         }
-        const record = await this.recordService.createRecord({movie: movie});
-        return await this.historyService.addMovieToHistory(history[0], record);
     }
 
-    async getMoviesFromProfilesHistory(id: number, profileId: number){
+    async getProfilesHistory(id: number, profileId: number){
         const user: User[] = await this.usersService.find(null,id)
 
         if(user.length===0){
@@ -194,7 +200,7 @@ export class AccountService {
             throw new NotFoundException(`Profile with id ${profileId} not found for user with id ${id}`)
         }
         const profile = await this.profilesService.find(currentProfile[0].id);
-        const history = await this.historyService.findHistory(profile[0].history);
+        const history = await this.historyService.find(profile[0].history);
         return history[0].records;
     }
 }

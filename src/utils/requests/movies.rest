@@ -1,12 +1,11 @@
 ### Create movie
 POST http://localhost:3001/movies
 Content-Type: application/json; charset=utf-8
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTQ2OTcwNjUsImV4cCI6MTcxNDcwMDY2NX0.hcqFkxzLF5PPkbiczRX3kE-p4jpeVZBTkbrWSUiIh30
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTQ3NTM5OTAsImV4cCI6MTcxNDc1NzU5MH0.vs44hkR7WDHXcF1FMPlo4RU-4pODnaYfqMGCxiyK3jQ
 
 {
-    "title": "Wanted",
-    "year": 2008,
-    "starring": ["James McAvoy","Angelina Jolie"]
+    "title": "YOU",
+    "year": 2018
 }
 
 ### Update movie

@@ -21,7 +21,7 @@ export class HistoryService {
         return await this.repo.remove(histories);
     }
 
-    async findHistory(history: Partial<History>){
+    async find(history: Partial<History>){
         return await this.repo.find({
             where: [
                 {id: history.id}
@@ -31,8 +31,7 @@ export class HistoryService {
     }
 
     async addMovieToHistory(history : History, record : Record){
-        console.log(record)
-        //history.records ? history.records.push(record) : history.records = [record];
-        //return this.repo.save(history);
+        history.records ? history.records.push(record) : history.records = [record];
+        return this.repo.save(history);
     }
 }

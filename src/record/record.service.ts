@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateRecordDTO } from 'src/utils/dtos/record/create-record.dto';
-import { Record } from 'src/utils/entities';
+import { History, Record, Movie } from 'src/utils/entities';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -9,9 +9,7 @@ export class RecordService {
     constructor(@InjectRepository(Record) private repo: Repository<Record>){}
 
     async createRecord(record: Partial<CreateRecordDTO>){
-        console.log("Record to be created::: ",record)
-        const newRecord = this.repo.create(record)
-        console.log("Record created ::: ",newRecord)
+        const newRecord = this.repo.create(record);
         return await this.repo.save(newRecord);
     }
 
@@ -23,10 +21,23 @@ export class RecordService {
         return await this.repo.remove(records);
     }
 
-    async findRecord(record: Partial<Record>){
+    async updateRecord(record: Record, newRecord: Partial<Record>){
+        return await this.repo.update(record, newRecord);
+    }
+
+    async find(record: Partial<Record>){
         return await this.repo.find({
             where: [
                 {id: record.id}
+            ],
+            relations: {movie:true}
+        })
+    }
+
+    async findMovieInHistory(history: Partial<History>, movie: Partial<Movie>){
+        return await this.repo.find({
+            where: [
+                {movie: movie, id: history.id}
             ],
             relations: {movie:true}
         })

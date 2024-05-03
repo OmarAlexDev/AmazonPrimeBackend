@@ -7,6 +7,7 @@ import { UpdateProfileDto } from 'src/utils/dtos/profile/update-profile.dto';
 import { IdentifierMovieDto } from 'src/utils/dtos/movies/identifier-movie.dto';
 import { AccountGuard } from 'src/utils/guards/account.guard';
 import { UpdateUserDto } from 'src/utils/dtos/users/update-user.dto';
+import { AddMovieToHistoryDTO } from 'src/utils/dtos/history/add-movie-history.dto';
 
 @UseGuards(AccountGuard)
 @Controller('account')
@@ -60,13 +61,13 @@ export class AccountController {
     }
 
     @Post(':id/profiles/:profileId/history')
-    async addMovieToProfilesHistory(@Param('id') id:string, @Param('profileId') profileId: string, @Body() body: AddMovieToWishlistDTO){
-        return this.accountService.addMovieToProfilesHistory(Number(id), Number(profileId), Number(body.movieId));
+    async addMovieToProfilesHistory(@Param('id') id:string, @Param('profileId') profileId: string, @Body() body: AddMovieToHistoryDTO){
+        return this.accountService.addMovieToProfilesHistory(Number(id), Number(profileId), body);
     }
 
     @Get(':id/profiles/:profileId/history')
     @UseInterceptors(new SerializerInterceptor(IdentifierMovieDto))
-    async getMoviesFromProfilesHistory(@Param('id') id:string, @Param('profileId') profileId: string){
-        return this.accountService.getMoviesFromProfilesHistory(Number(id),Number(profileId));
+    async getProfilesHistory(@Param('id') id:string, @Param('profileId') profileId: string){
+        return this.accountService.getProfilesHistory(Number(id),Number(profileId));
     }
 }
