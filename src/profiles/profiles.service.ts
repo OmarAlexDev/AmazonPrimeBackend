@@ -13,7 +13,7 @@ export class ProfilesService {
             where: [
                 {id: id}
             ],
-            relations: {wishlist:true}
+            relations: {wishlist:true, history: true}
         }) 
     }
 
@@ -50,8 +50,21 @@ export class ProfilesService {
             where: [
                 {id: In (ids)}
             ],
-            relations: {wishlist:true}
+            relations: {wishlist:true, history: true}
         }) 
         return wishlists.map(prof=>{return prof.wishlist});
+    }
+
+    async getProfilesHistories(profiles: Profile []){
+        const ids = profiles.map(prof=> {
+            return prof.id
+        })
+        const histories = await this.repo.find({
+            where: [
+                {id: In (ids)}
+            ],
+            relations: {wishlist:true, history: true}
+        }) 
+        return histories.map(prof=>{return prof.history});
     }
 }

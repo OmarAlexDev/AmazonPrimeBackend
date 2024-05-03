@@ -1,13 +1,13 @@
-import { IsNumber, IsOptional, IsString, Min, Max } from "class-validator";
+import { IsNumber, IsOptional, IsString, Min, Max, IsBoolean } from "class-validator";
 import { Transform } from "class-transformer";
 export class CreateMovieDto{
 
     @IsString()
     title: string;
 
-    @IsString()
+    @IsNumber()
     @IsOptional()
-    duration: string;
+    duration: number;
 
     @IsNumber()
     @Min(1980)
@@ -34,6 +34,10 @@ export class CreateMovieDto{
     @Min(5)
     @Max(10)
     imdb: number;
+
+    @IsBoolean()
+    @IsOptional()
+    original: boolean;
 
     @IsOptional()
     @IsString()

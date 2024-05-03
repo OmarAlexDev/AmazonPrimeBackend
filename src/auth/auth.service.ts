@@ -5,6 +5,7 @@ import { SignInUserDto } from 'src/utils/dtos/users/signin-user.dto';
 import { UsersService } from 'src/users/users.service';
 import { ProfilesService } from 'src/profiles/profiles.service';
 import { WishlistService } from 'src/wishlist/wishlist.service';
+import { HistoryService } from 'src/history/history.service';
 import { decrypt} from 'src/utils/functions/bcrypt';
 import { generateToken } from 'src/utils/functions/jwt';
 
@@ -12,7 +13,7 @@ import { generateToken } from 'src/utils/functions/jwt';
 @Injectable()
 export class AuthService {
 
-    constructor(private usersService: UsersService, private profilesService: ProfilesService, private wishlistService: WishlistService){}
+    constructor(private usersService: UsersService, private profilesService: ProfilesService, private wishlistService: WishlistService, private historyService: HistoryService){}
 
     async createAccount(body: CreateUserDto){
         const existingUser: User [] = await this.usersService.find(body.email,null);
@@ -22,6 +23,7 @@ export class AuthService {
         const newUser =  await this.usersService.createUser(body)
         const newProfile = await this.profilesService.createProfile({username: newUser.firstName});
         await this.wishlistService.createWishlist({profile: newProfile});
+        await this.historyService.createHistory({profile: newProfile});
         return await this.usersService.addProfileToUser(newUser, newProfile);
     }
 

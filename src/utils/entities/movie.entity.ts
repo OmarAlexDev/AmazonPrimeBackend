@@ -8,8 +8,8 @@ export class Movie{
     @Column()
     title: string;
 
-    @Column({default: '1h'})
-    duration: string;
+    @Column({default: 90})
+    duration: number;
 
     @Column()
     year: number;
@@ -25,6 +25,9 @@ export class Movie{
     
     @Column({nullable: true})
     imdb: number;
+
+    @Column({default: false})
+    original: boolean;
 
     @Column({default: 'None available'})
     description: string;

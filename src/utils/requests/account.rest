@@ -1,29 +1,29 @@
 ### Delete account
-DELETE http://localhost:3001/account/3
+DELETE http://localhost:3001/account/1
 Content-Type: application/json; charset=utf-8
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MkB0ZXN0LmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNDEwNTMxMSwiZXhwIjoxNzE0MTA4OTExfQ.8G-2wkNMxdhoqz32g8mvAg1w_V0f_tgoOUadR4N0Lw4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTQ2ODYxMDAsImV4cCI6MTcxNDY4OTcwMH0.MEEstlYX8TSXTcDFYoUMUGP7OLso4bINLZPujlZFa9g
 
 ### Update account´s user
 PATCH http://localhost:3001/account/1
 Content-Type:  application/json; charset=utf-8
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTQwMjE0NDUsImV4cCI6MTcxNDAyNTA0NX0.SyRv7NeY1Qe3msCrY4VoHrM7jQCsQW_UKlzArbILrDw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTQxNDcwNjcsImV4cCI6MTcxNDE1MDY2N30.uY09SqDMgdlkwobPDAzJPJtenXQ4ursEUNJfKi-L35s
 
 {
-    "password": "test",
+    "isAdmin": true
 }
 
 ### Get account's profiles
-GET http://localhost:3001/account/7/profiles
+GET http://localhost:3001/account/2/profiles
 Content-Type: application/json; charset=utf-8
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MkB0ZXN0LmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNDEwNTMxMSwiZXhwIjoxNzE0MTA4OTExfQ.8G-2wkNMxdhoqz32g8mvAg1w_V0f_tgoOUadR4N0Lw4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3MTQxNDgxNzAsImV4cCI6MTcxNDE1MTc3MH0.kRDP6XxZ3R1ATpPLQAfcaoVhQNZdM7T01kkhBtINVgc
 
 ### Add profile to account
-POST http://localhost:3001/account/7/profiles
+POST http://localhost:3001/account/1/profiles
 Content-Type: application/json; charset=utf-8
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MkB0ZXN0LmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNDEwNTMxMSwiZXhwIjoxNzE0MTA4OTExfQ.8G-2wkNMxdhoqz32g8mvAg1w_V0f_tgoOUadR4N0Lw4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTQ2ODYwNTQsImV4cCI6MTcxNDY4OTY1NH0.-u5t5XdRQm0SIxLpFrDMOik5GVxUywUIMtnwte1vkiw
 
 {
-    "username": "aunt"
+    "username": "cousin"
 }
 
 ### Delete profile from account
@@ -46,12 +46,12 @@ Content-Type: application/json; charset=utf-8
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTM5OTY0MTAsImV4cCI6MTcxNDAwMDAxMH0.MKb-Z8tiRM_T8_QxI8D64OfX527ANJzaJZmXYBAog_g
 
 ### Add movie to profile´s wishlist
-POST http://localhost:3001/account/3/profiles/16/wishlist
+POST http://localhost:3001/account/1/profiles/1/wishlist
 Content-Type: application/json; charset=utf-8
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTM5OTY0MTAsImV4cCI6MTcxNDAwMDAxMH0.MKb-Z8tiRM_T8_QxI8D64OfX527ANJzaJZmXYBAog_g
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTQ2OTcwNjUsImV4cCI6MTcxNDcwMDY2NX0.hcqFkxzLF5PPkbiczRX3kE-p4jpeVZBTkbrWSUiIh30
 
 {
-    "movieId":2
+    "movieId":1
 }
 
 ### Remove movie from profile´s wishlist
@@ -62,3 +62,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiO
 {
     "movieId":2
 }
+
+### Add movie to profile´s history
+POST http://localhost:3001/account/1/profiles/1/history
+Content-Type: application/json; charset=utf-8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTQ2OTcwNjUsImV4cCI6MTcxNDcwMDY2NX0.hcqFkxzLF5PPkbiczRX3kE-p4jpeVZBTkbrWSUiIh30
+
+{
+    "movieId":1
+}
+
+### Get movies from profile´s history
+GET http://localhost:3001/account/2/profiles/2/history
+Content-Type: application/json; charset=utf-8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MkB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTQ2ODY3MDUsImV4cCI6MTcxNDY5MDMwNX0.Tn7DPxMLPdShVHibqy6j6EzH8DEfQpwTDqmBCzpC5oc

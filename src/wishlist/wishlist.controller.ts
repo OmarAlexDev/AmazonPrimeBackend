@@ -1,4 +1,4 @@
-import { Controller,Delete, Param, UseGuards } from '@nestjs/common';
+import { Controller, UseGuards } from '@nestjs/common';
 import { WishlistService } from './wishlist.service';
 import { AdminGuard } from 'src/utils/guards/admin.guard';
 
@@ -6,9 +6,4 @@ import { AdminGuard } from 'src/utils/guards/admin.guard';
 @Controller('wishlist')
 export class WishlistController {
     constructor(private wishlistService: WishlistService){}
-    
-    @Delete('/:id')
-    async deleteWishlist(@Param('id') id: string){
-        return this.wishlistService.deleteWishlist({id:Number(id)})
-    }
 }

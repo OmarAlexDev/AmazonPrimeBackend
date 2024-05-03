@@ -9,9 +9,9 @@ GET http://localhost:3001/users/2
 Content-Type: application/json; charset=utf-8
 
 ### Update user
-PATCH http://localhost:3001/users/3
+PATCH http://localhost:3001/users/1
 Content-Type: application/json; charset=utf-8
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MkB0ZXN0LmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNDAyMjA1OCwiZXhwIjoxNzE0MDI1NjU4fQ.oVstKLBmKBV3n6UYmOGKmw1CCbTgXd3r8R3x5iwIY6o
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNDE0NzI0MiwiZXhwIjoxNzE0MTUwODQyfQ.G3lob46jIsNUUNgIZ8P8p-G0pAPmzxfzqJk6PSO92rg
 
 {
     "isAdmin": false
@@ -20,13 +20,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiO
 ### Create user
 POST http://localhost:3001/users
 Content-Type: application/json; charset=utf-8
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MkB0ZXN0LmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNDA4ODE2MCwiZXhwIjoxNzE0MDkxNzYwfQ.WyJHMQiOfqjRJHurUvElhc-TaQkDJ1998BxBlGYiJXw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNDE0NzI0MiwiZXhwIjoxNzE0MTUwODQyfQ.G3lob46jIsNUUNgIZ8P8p-G0pAPmzxfzqJk6PSO92rg
 
 {
-    "email": "test5@test.com",  
-    "password": "test" ,   
-    "firstName": "Alex",
-    "isAdmin": false
+    "email": "admin@admin.com",  
+    "password": "admin" ,   
+    "firstName": "admin",
+    "isAdmin": true
 }
 
 ### Delete user

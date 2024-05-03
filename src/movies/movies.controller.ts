@@ -15,7 +15,7 @@ import { SubscriptionGuard } from 'src/utils/guards/subscription.guard';
 export class MoviesController {
     constructor(private moviesService : MoviesService){}
 
-    @UseGuards(AdminGuard)
+    //@UseGuards(AdminGuard)
     @Post()
     async createMovie(@Body() body: CreateMovieDto){
         const movies = await this.moviesService.findMovie({title: body.title})
@@ -47,13 +47,12 @@ export class MoviesController {
         return await this.moviesService.findMovieById(Number(id));
     }
 
-    @UseGuards(AdminGuard)
+    //@UseGuards(AdminGuard)
     @Delete('/:id')
     async deleteMovie(@Param('id') id : string){
         if(!await this.moviesService.findMovieById(Number(id))){
             throw new NotFoundException("Movie not found");
         }
-
         return await this.moviesService.deleteMovie(Number(id));
     }
 }

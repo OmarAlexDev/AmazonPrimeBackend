@@ -1,6 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToOne, JoinColumn } from "typeorm";
-import { User } from "./user.entity";
-import { Wishlist } from "./wishlist.entity";
+import { History, User, Wishlist } from "./../entities/index";
 
 @Entity()
 export class Profile{
@@ -23,4 +22,8 @@ export class Profile{
     @OneToOne(()=> Wishlist, (wishlist)=>wishlist.profile)
     @JoinColumn()
     wishlist: Wishlist;
+
+    @OneToOne(()=> History, (history)=>history.profile)
+    @JoinColumn()
+    history: History;
 }

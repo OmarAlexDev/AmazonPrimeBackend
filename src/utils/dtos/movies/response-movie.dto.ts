@@ -11,7 +11,10 @@ export class ResponseMovieDto{
     description: string;
 
     @Expose()
-    duration: string;
+    original: boolean;
+
+    @Expose()
+    duration: number;
 
     @Expose()
     year: number;
@@ -34,8 +37,8 @@ export class ResponseMovieDto{
     @Expose()
     @Transform(({obj})=>{
         return { 
-            languages: obj.languages.split(','),
-            subtitles: obj.subtitles.split(','),
+            languages: obj.languages ? obj.languages.split(',') : [],
+            subtitles: obj.subtitles ? obj.subtitles.split(',') : [],
             directors: obj.directors ? obj.directors.split(',') : [],
             producers: obj.producers ? obj.producers.split(',') : [],
             starring: obj.starring ? obj.starring.split(',') : []

@@ -5,12 +5,12 @@ import { Profile } from "./profile.entity";
 @Entity()
 export class Wishlist{
     @PrimaryGeneratedColumn()
-    id: number
+    id: number;
     
     @OneToOne(()=> Profile, (profile)=>profile.wishlist)
-    profile: Profile
+    profile: Profile;
 
     @ManyToMany(() => Movie)
     @JoinTable()
-    movies:  Movie []
+    movies:  Movie [];
 }

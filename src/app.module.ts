@@ -9,9 +9,11 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { WishlistModule } from './wishlist/wishlist.module';
 import { MoviesModule } from './movies/movies.module';
-import { Movie, Profile, User, Wishlist } from './utils/entities';
+import { Movie, History, Profile, User, Wishlist, Record } from './utils/entities';
 import { ProfilesModule } from './profiles/profiles.module';
 import { AccountModule } from './account/account.module';
+import { HistoryModule } from './history/history.module';
+import { RecordModule } from './record/record.module';
 
 @Module({
   imports: [
@@ -21,7 +23,7 @@ import { AccountModule } from './account/account.module';
       type: 'sqlite',
       database: 'db/amazonPrime.sqlite',
       synchronize: true,
-      entities: [User,Movie,Wishlist, Profile],
+      entities: [User,Movie,Wishlist, Profile, History, Record],
     }),
     ConfigModule.forRoot({
       envFilePath: '.env.development',
@@ -30,7 +32,9 @@ import { AccountModule } from './account/account.module';
     WishlistModule,
     MoviesModule,
     ProfilesModule,
-    AccountModule
+    AccountModule,
+    HistoryModule,
+    RecordModule
   ],
   controllers: [AppController],
   providers: [

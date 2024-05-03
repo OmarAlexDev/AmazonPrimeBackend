@@ -1,4 +1,4 @@
-import { IsNumber, IsOptional, IsString, Min, Max, isNumber } from "class-validator";
+import { IsNumber, IsOptional, IsString, Min, Max, IsBoolean } from "class-validator";
 import { Transform } from "class-transformer";
 export class UpdateMovieDto{
 
@@ -6,9 +6,9 @@ export class UpdateMovieDto{
     @IsString()
     title: string;
 
-    @IsString()
+    @IsNumber()
     @IsOptional()
-    duration: string;
+    duration: number;
 
     @IsNumber()
     @Min(1980)
@@ -40,6 +40,10 @@ export class UpdateMovieDto{
     @IsOptional()
     @IsString()
     description: string;
+
+    @IsBoolean()
+    @IsOptional()
+    original: boolean;
 
     @IsOptional()
     @IsString({each: true})

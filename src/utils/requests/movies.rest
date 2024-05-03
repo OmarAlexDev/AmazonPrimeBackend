@@ -1,12 +1,12 @@
 ### Create movie
 POST http://localhost:3001/movies
 Content-Type: application/json; charset=utf-8
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MkB0ZXN0LmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxMjAyMjU0OSwiZXhwIjoxNzEyMDI2MTQ5fQ.IahVsAFEZfyn55ePvUmKP3DMbU1247qJr5s3zv8ENXc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTQ2OTcwNjUsImV4cCI6MTcxNDcwMDY2NX0.hcqFkxzLF5PPkbiczRX3kE-p4jpeVZBTkbrWSUiIh30
 
 {
-    "title": "Shrek",
-    "year": 2002,
-    "starring": ["Cameron Diaz","Eddie Murphy"]
+    "title": "Wanted",
+    "year": 2008,
+    "starring": ["James McAvoy","Angelina Jolie"]
 }
 
 ### Update movie
@@ -28,12 +28,10 @@ Content-Type: application/json; charset=utf-8
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTQxMTA4OTgsImV4cCI6MTcxNDExNDQ5OH0.drY8DJlwEZfC63TiNxb5ztOOb4Y7zKvNBMAkUUvSLPQ
 
 ### Obtain movie by id
-
 GET http://localhost:3001/movies/1
 Content-Type: application/json; charset=utf-8
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTQxMTA4OTgsImV4cCI6MTcxNDExNDQ5OH0.drY8DJlwEZfC63TiNxb5ztOOb4Y7zKvNBMAkUUvSLPQ
 
 ### Delete movie by id
-
-Delete http://localhost:3001/movies/10
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0MkB0ZXN0LmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxMjAyMjU0OSwiZXhwIjoxNzEyMDI2MTQ5fQ.IahVsAFEZfyn55ePvUmKP3DMbU1247qJr5s3zv8ENXc
+Delete http://localhost:3001/movies/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MTQ2OTYzMjcsImV4cCI6MTcxNDY5OTkyN30.dnM1_TfCIp7sETHc75TkXq24LGhEVgCIW3CnQJkPFV4
